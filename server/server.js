@@ -18,4 +18,14 @@ app.get('/oneteam', (req, res) => {
   });
 });
 
+app.get('/all', (req, res) => {
+  mongo.find({}).toArray((err, items) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(items);
+    }
+  });
+});
+
 app.listen(port, () => console.log(`Server running on port ${port}`));
