@@ -7,9 +7,11 @@ const Navbar = props => {
         <img src="../../public/american-football.svg" alt="Football" className="football-icon" /> Texas HS <span className="blitz">Blitz</span>
       </h1>
       <ul className="nav-items">
-        <li className="nav-item">All Schools</li>
+        <li className="nav-item" onClick={() => props.changeView('district')}>
+          Districts
+        </li>
         <li className="nav-item">State Championship Appearances</li>
-        <input type="text" className="search" placeholder="&#x1F50D; Search for teams" />
+        <input type="text" className="search" placeholder="&#x1F50D; City, School, Mascot" />
       </ul>
     </nav>
   );
