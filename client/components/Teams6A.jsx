@@ -16,11 +16,11 @@ const Teams6A = props => {
         {props.teams.map((team, i) => {
           return (
             <tr key={i}>
-              <td>{team.city ? `${team.city} ${team.school}` : `${team.school}`}</td>
-              <td>{team.mascot}</td>
-              <td>{team.class}</td>
-              <td>{team.district}</td>
-              <td>{team.enrollment}</td>
+              <td className="school">{team.city ? `${team.city} ${team.school}` : `${team.school}`}</td>
+              <td className="mascot">{team.mascot}</td>
+              <td className="class num">{team.class}</td>
+              <td className="district num">{team.district}</td>
+              <td className="enrollment num">{team.enrollment}</td>
             </tr>
           );
         })}
