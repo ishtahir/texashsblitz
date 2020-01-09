@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Teams6A from './Teams6A';
 import axios from 'axios';
 
 class App extends Component {
@@ -19,7 +20,12 @@ class App extends Component {
   }
 
   render() {
-    return <h1>Welcome to Texas HS BLiTZ</h1>;
+    return (
+      <>
+        <h1>Welcome to Texas HS BLiTZ</h1>
+        <Teams6A teams={this.state.teams6A} />
+      </>
+    );
   }
 }
 
