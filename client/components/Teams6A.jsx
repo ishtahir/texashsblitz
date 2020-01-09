@@ -7,7 +7,6 @@ const Teams6A = props => {
         <tr>
           <th>School</th>
           <th>Mascot</th>
-          <th>Class</th>
           <th>District</th>
           <th>Enrollment</th>
         </tr>
@@ -18,7 +17,6 @@ const Teams6A = props => {
             <tr key={i}>
               <td className="school">{team.city ? `${team.city} ${team.school}` : `${team.school}`}</td>
               <td className="mascot">{team.mascot}</td>
-              <td className="class num">{team.class}</td>
               <td className="district num">{team.district}</td>
               <td className="enrollment num">{team.enrollment}</td>
             </tr>
