@@ -1,10 +1,61 @@
-.headline {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+  background: #ddd;
+  margin-bottom: 40px;
+}
+
+.nav-items {
+  display: flex;
+  list-style: none;
+  line-height: 40px;
+}
+
+.nav-item {
+  margin-right: 60px;
+}
+
+.search {
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
+  color: #888;
+  outline: none;
+}
+
+.logo {
+  font-family: 'Saira Stencil One', cursive;
+  font-size: 40px;
+}
+
+.football-icon {
+  width: 30px;
+}
+
+.blitz {
+  font-family: 'Ceviche One', cursive;
+  font-size: 45px;
 }
 
 table {
   text-align: center;
   margin: 0 auto;
+  font-family: 'Teko', sans-serif;
+  font-size: 26px;
+  font-weight: 300;
 }
 
 tr,
@@ -13,8 +64,12 @@ th {
   border: 1px solid #333;
 }
 
+th {
+  font-weight: 600;
+}
+
 td {
-  width: 150px;
+  width: 160px;
 }
 
 .school {
@@ -22,5 +77,5 @@ td {
 }
 
 .num {
-  width: 80px;
+  width: 100px;
 }
