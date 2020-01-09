@@ -22,7 +22,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <h1>Welcome to Texas HS BLiTZ</h1>
+        <h1 className="headline">Welcome to Texas HS BLiTZ</h1>
         <Teams6A teams={this.state.teams6A} />
       </>
     );
