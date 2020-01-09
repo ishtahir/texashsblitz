@@ -5,7 +5,9 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: sans-serif;
+  background: #fefefe;
+  color: #333;
 }
 
 .navbar {
@@ -13,7 +15,7 @@ body {
   justify-content: space-around;
   align-items: center;
   height: 100px;
-  background: #ddd;
+  background: #333;
   margin-bottom: 40px;
 }
 
@@ -25,6 +27,15 @@ body {
 
 .nav-item {
   margin-right: 60px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #eee;
+}
+
+.nav-item:hover {
+  background: #fc6c6c;
+  color: #fff;
 }
 
 .search {
@@ -34,25 +45,30 @@ body {
   width: 200px;
   color: #888;
   outline: none;
+  font-size: 16px;
 }
 
 .logo {
   font-family: 'Saira Stencil One', cursive;
   font-size: 40px;
+  color: #eee;
+  cursor: pointer;
 }
 
 .football-icon {
   width: 30px;
+  filter: invert(100%) sepia(5%) saturate(443%) hue-rotate(194deg) brightness(118%) contrast(87%);
 }
 
 .blitz {
   font-family: 'Ceviche One', cursive;
   font-size: 45px;
+  color: #eee;
 }
 
 table {
   text-align: center;
-  margin: 0 auto;
+  margin: 0 auto 30px auto;
   font-family: 'Teko', sans-serif;
   font-size: 26px;
   font-weight: 300;
@@ -77,5 +93,5 @@ td {
 }
 
 .num {
-  width: 100px;
+  width: 120px;
 }
