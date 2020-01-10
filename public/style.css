@@ -51,19 +51,26 @@ body {
 .logo {
   font-family: 'Saira Stencil One', cursive;
   font-size: 40px;
-  color: #eee;
+  /* color: #f36358; */
+  background-color: #00f7ff;
+  background-image: -webkit-linear-gradient(315deg, #ffffff 0%, #239700fd 64%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   cursor: pointer;
 }
 
 .football-icon {
   width: 30px;
-  filter: invert(100%) sepia(5%) saturate(443%) hue-rotate(194deg) brightness(118%) contrast(87%);
+  filter: invert(99%) sepia(54%) saturate(67%) hue-rotate(239deg) brightness(113%) contrast(87%);
 }
 
 .blitz {
   font-family: 'Ceviche One', cursive;
   font-size: 45px;
-  color: #eee;
+  background-color: #ff0000;
+  background-image: -webkit-linear-gradient(315deg, #ff0000 0%, #ffed00 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 table {
@@ -92,6 +99,11 @@ td {
 
 .num {
   width: 120px;
+}
+
+.years {
+  width: 300px;
+  padding: 10px 20px;
 }
 
 .table-header {
