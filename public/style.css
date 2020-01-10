@@ -72,12 +72,10 @@ table {
   font-family: 'Teko', sans-serif;
   font-size: 26px;
   font-weight: 300;
-}
-
-tr,
-td,
-th {
-  border: 1px solid #333;
+  cursor: default;
+  border: 10px solid #797979;
+  padding: 20px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 th {
@@ -94,4 +92,9 @@ td {
 
 .num {
   width: 120px;
+}
+
+.table-header {
+  background: #333;
+  color: #eee;
 }
