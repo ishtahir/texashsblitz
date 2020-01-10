@@ -6,7 +6,7 @@ You can see all teams, based on classifications, districts, enrollments, and sta
 
 ## Installation
 
-Download the zip and run the following:
+Download the zip and run the following on the terminal:
 
 ```bash
 npm install
@@ -17,3 +17,7 @@ To start the server run:
 ```bash
 npm start
 ```
+
+## Tech Stack
+
+![MERN Stack](https://geeksperhour.com/wp-content/uploads/2019/02/mern-img.png 'Mongo, Express, React, Node')
