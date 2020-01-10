@@ -48,6 +48,10 @@ body {
   font-size: 16px;
 }
 
+.search:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
 .logo {
   font-family: 'Saira Stencil One', cursive;
   font-size: 40px;
