@@ -1,7 +1,7 @@
 import React from 'react';
 
 const District = props => {
-  return (
+  return props.teams.length > 0 ? (
     <table>
       <thead>
         <tr>
@@ -27,7 +27,7 @@ const District = props => {
         })}
       </tbody>
     </table>
-  );
+  ) : null;
 };
 
 export default District;
