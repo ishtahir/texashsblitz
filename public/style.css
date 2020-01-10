@@ -4,7 +4,14 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
   font-family: sans-serif;
   background: #fefefe;
   color: #333;
@@ -119,4 +126,19 @@ td {
 .current {
   background: #fc6c6c;
   color: #333;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: auto;
+  background: #333;
+  height: 60px;
+}
+
+.footer p {
+  color: #eee;
+  font-size: 14px;
 }
