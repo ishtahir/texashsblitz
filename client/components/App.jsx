@@ -3,6 +3,7 @@ import All6ATeamsView from './All6ATeamsView';
 import Navbar from './Navbar';
 import DistrictView from './DistrictView';
 import StateAppearanceView from './StateAppearanceView';
+import EnrollView from './EnrollView';
 import axios from 'axios';
 
 class App extends Component {
@@ -23,7 +24,7 @@ class App extends Component {
   }
 
   getAllTeams() {
-    axios.get('http://localhost:4545/all').then(res => this.setState({ teams6A: res.data }));
+    axios.get('http://localhost:4545/all').then(res => this.setState({ teams6A: res.data }, () => this.sort('district')));
   }
 
   changeView(view) {
@@ -31,37 +32,71 @@ class App extends Component {
   }
 
   handleSearchInput(searchInput) {
-    this.setState({ searchInput });
+    this.setState({ searchInput }, () => this.handleFilteredTeams());
   }
 
-  sort(criteria) {
-    let sorted;
-    if (criteria === 'district') {
-      sorted = this.state.teams6A.sort((a, b) => a.district - b.district);
-    }
+  handleFilteredTeams() {
+    const filteredTeams = this.state.teams6A.filter(
+      team =>
+        `${team.city.toLowerCase()} ${team.school.toLowerCase()} ${team.mascot.toLowerCase()}`.includes(this.state.searchInput.toLowerCase()) ||
+        team.city.toLowerCase().includes(this.state.searchInput.toLowerCase()) ||
+        team.school.toLowerCase().includes(this.state.searchInput.toLowerCase()) ||
+        team.mascot.toLowerCase().includes(this.state.searchInput.toLowerCase())
+    );
+
+    this.setState({ filteredTeams });
+  }
+
+  sort() {
+    let sorted = this.state.teams6A.sort((a, b) => {
+      if (a.district < b.district) {
+        return -1;
+      } else if (a.district > b.district) {
+        return 1;
+      } else {
+        if ((a.city ? a.city : a.school).toLowerCase() < (b.city ? b.city : b.school).toLowerCase()) {
+          return -1;
+        } else if ((a.city ? a.city : a.school).toLowerCase() > (b.city ? b.city : b.school).toLowerCase()) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
+    });
   }
 
   renderView() {
     if (this.state.view === 'all') {
-      return <All6ATeamsView teams={this.state.teams6A} />;
+      return <All6ATeamsView teams={this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams} />;
     } else if (this.state.view === 'district') {
-      return <DistrictView districts={this.state.districts} teams={this.state.teams6A} />;
+      return <DistrictView districts={this.state.districts} teams={this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams} />;
+    } else if (this.state.view === 'enroll') {
+      return (
+        <EnrollView
+          teams={(this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams).sort((a, b) => b.enrollment - a.enrollment)}
+        />
+      );
     } else if (this.state.view === 'champions') {
       return (
         <StateAppearanceView
-          teams={this.state.teams6A
-            .filter(team => team.stateAppearences.length > 0)
-            .sort((a, b) => b.stateAppearences.length - a.stateAppearences.length)}
+          teams={(this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams)
+            .filter(team => team.stateAppearances.length > 0)
+            .sort((a, b) => b.stateAppearances.length - a.stateAppearances.length)}
         />
       );
     }
   }
 
   render() {
-    this.sort('district');
+    this.sort();
     return (
       <>
-        <Navbar changeView={this.changeView.bind(this)} />
+        <Navbar
+          changeView={this.changeView.bind(this)}
+          handleSearchInput={this.handleSearchInput.bind(this)}
+          searchInput={this.state.searchInput}
+          view={this.state.view}
+        />
         {this.renderView()}
       </>
     );
