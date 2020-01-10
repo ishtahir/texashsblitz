@@ -4,7 +4,7 @@ const Navbar = props => {
   return (
     <nav className="navbar">
       <h1 className="logo">
-        <img src="../../public/american-football.svg" alt="Football" className="football-icon" /> Texas HS <span className="blitz">Blitz</span>
+        <img src="../../american-football.svg" alt="Football" className="football-icon" /> Texas HS <span className="blitz">Blitz</span>
       </h1>
       <ul className="nav-items">
         <li className={`${props.view === 'all' ? 'current' : ''} nav-item`} onClick={() => props.changeView('all')}>
