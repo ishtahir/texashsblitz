@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   getAllTeams() {
-    axios.get('http://localhost:4545/all').then(res => this.setState({ teams6A: res.data }, () => this.sort('district')));
+    axios.get('/load').then(res => this.setState({ teams6A: res.data }, () => this.sort()));
   }
 
   changeView(view) {
