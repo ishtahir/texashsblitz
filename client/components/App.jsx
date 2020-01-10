@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import All6ATeamsView from './All6ATeamsView';
 import Navbar from './Navbar';
 import DistrictView from './DistrictView';
+import StateAppearanceView from './StateAppearanceView';
 import axios from 'axios';
 
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
     this.state = {
       teams6A: [],
       filteredTeams: [],
+      searchInput: '',
       view: 'all',
       districts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
     };
@@ -28,6 +30,10 @@ class App extends Component {
     this.setState({ view });
   }
 
+  handleSearchInput(searchInput) {
+    this.setState({ searchInput });
+  }
+
   sort(criteria) {
     let sorted;
     if (criteria === 'district') {
@@ -41,7 +47,13 @@ class App extends Component {
     } else if (this.state.view === 'district') {
       return <DistrictView districts={this.state.districts} teams={this.state.teams6A} />;
     } else if (this.state.view === 'champions') {
-      return <StateAppearancesView />;
+      return (
+        <StateAppearanceView
+          teams={this.state.teams6A
+            .filter(team => team.stateAppearences.length > 0)
+            .sort((a, b) => b.stateAppearences.length - a.stateAppearences.length)}
+        />
+      );
     }
   }
 
