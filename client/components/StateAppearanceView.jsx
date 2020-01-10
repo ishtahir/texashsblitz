@@ -20,8 +20,8 @@ const StateAppearanceView = props => {
           return (
             <tr key={`${team}${i}`} style={{ background: team.colors[0], color: team.colors[1] }}>
               <td className="school">{team.city ? `${team.city} ${team.school} ${team.mascot}` : `${team.school} ${team.mascot}`}</td>
-              <td className="appearances num">{team.stateAppearences.length}</td>
-              <td className="years">{team.stateAppearences.sort((a, b) => a - b).join(', ')}</td>
+              <td className="appearances num">{team.stateAppearances.length}</td>
+              <td className="years">{team.stateAppearances.sort((a, b) => a - b).join(', ')}</td>
             </tr>
           );
         })}
