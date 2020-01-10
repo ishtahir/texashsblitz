@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import DistrictView from './DistrictView';
 import StateAppearanceView from './StateAppearanceView';
 import EnrollView from './EnrollView';
+import Footer from './Footer';
 import axios from 'axios';
 
 class App extends Component {
@@ -98,6 +99,7 @@ class App extends Component {
           view={this.state.view}
         />
         {this.renderView()}
+        <Footer />
       </>
     );
   }
