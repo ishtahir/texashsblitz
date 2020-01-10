@@ -1,6 +1,7 @@
 const express = require('express');
-const mongo = require('./mongo.js');
 const cors = require('cors');
+const axios = require('axios');
+const mongo = require('./mongo.js');
 
 const app = express();
 const port = process.env.PORT || 4545;
@@ -28,6 +29,16 @@ app.get('/all', (req, res) => {
       res.send(items);
     }
   });
+});
+
+app.get('/load', (req, res) => {
+  axios
+    .get('https://txhsfb.s3.us-east-2.amazonaws.com/2019-6a.json')
+    .then(response => {
+      console.log(response);
+      res.send(response.data);
+    })
+    .catch(err => res.send(err));
 });
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
