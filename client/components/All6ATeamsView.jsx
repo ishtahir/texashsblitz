@@ -5,7 +5,9 @@ const Teams6A = props => {
     <table>
       <thead>
         <tr>
-          <th colSpan="4">6A Classification (AAAAAA)</th>
+          <th colSpan="4" className="table-header">
+            6A Classification (AAAAAA)
+          </th>
         </tr>
         <tr>
           <th>School</th>
@@ -17,7 +19,7 @@ const Teams6A = props => {
       <tbody>
         {props.teams.map((team, i) => {
           return (
-            <tr key={i}>
+            <tr key={i} style={{ background: team.colors[0], color: team.colors[1] }}>
               <td className="school">{team.city ? `${team.city} ${team.school}` : `${team.school}`}</td>
               <td className="mascot">{team.mascot}</td>
               <td className="district num">{team.district}</td>
