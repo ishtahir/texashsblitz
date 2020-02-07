@@ -1,23 +1,16 @@
 # Texas High School Blitz
 
-Texas HS Blitz is a passion project of mine, that shows information and stats for all Texas HS Football teams.
+Texas HS Blitz is a beautiful implementation of Texas High School Football teams, that shows district information, enrollment numbers and State Championship appearances for each of the 251 teams in the 6A classification.
 
-You can see all teams, based on classifications, districts, enrollments, and state championship appearances.
+## Texas HS Blitz in Action
 
-## Installation
+*GIF's coming soon*
 
-Download the zip and run the following on the terminal:
-
-```bash
-npm install
-```
-
-To start the server run:
-
-```bash
-npm start
-```
+## Features Coming Soon
+1. All remaining teams from Classes 5A - 1A
+2. New enrollment numbers from the 2020-2022 Realignment
+3. Championship details and wins for all teams
 
 ## Tech Stack
 
-![MERN Stack](https://geeksperhour.com/wp-content/uploads/2019/02/mern-img.png 'Mongo, Express, React, Node')
+![MERN Stack](https://txhsfb.s3.us-east-2.amazonaws.com/mern-img.png 'Mongo, Express, React, Node')
