@@ -4,7 +4,7 @@ Texas HS Blitz is a beautiful implementation of Texas High School Football teams
 
 ## Texas HS Blitz in Action
 
-*GIF's coming soon*
+[Check out Texas HS Blitz](https://www.txhsblitz.herokuapp.com)
 
 ## Features Coming Soon
 1. All remaining teams from Classes 5A - 1A
