@@ -17,11 +17,36 @@ body {
   color: #333;
 }
 
+.logo {
+  font-family: 'Saira Stencil One', cursive;
+  font-size: 40px;
+  /* color: #f36358; */
+  background-color: #00f7ff;
+  background-image: -webkit-linear-gradient(315deg, #ffffff 0%, #239700fd 64%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.football-icon {
+  width: 30px;
+  filter: invert(99%) sepia(54%) saturate(67%) hue-rotate(239deg) brightness(113%) contrast(87%);
+}
+
+.blitz {
+  font-family: 'Ceviche One', cursive;
+  font-size: 45px;
+  background-color: #ff0000;
+  background-image: -webkit-linear-gradient(315deg, #ff0000 0%, #ffed00 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .navbar {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 100px;
+  /* height: 100px; */
   background: #333;
   margin-bottom: 40px;
 }
@@ -57,31 +82,6 @@ body {
 
 .search:focus::-webkit-input-placeholder {
   color: transparent;
-}
-
-.logo {
-  font-family: 'Saira Stencil One', cursive;
-  font-size: 40px;
-  /* color: #f36358; */
-  background-color: #00f7ff;
-  background-image: -webkit-linear-gradient(315deg, #ffffff 0%, #239700fd 64%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  cursor: pointer;
-}
-
-.football-icon {
-  width: 30px;
-  filter: invert(99%) sepia(54%) saturate(67%) hue-rotate(239deg) brightness(113%) contrast(87%);
-}
-
-.blitz {
-  font-family: 'Ceviche One', cursive;
-  font-size: 45px;
-  background-color: #ff0000;
-  background-image: -webkit-linear-gradient(315deg, #ff0000 0%, #ffed00 74%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 table {
@@ -141,4 +141,23 @@ td {
 .footer p {
   color: #eee;
   font-size: 14px;
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .nav-items {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav-item {
+    margin-right: 0;
+  }
+
+  .football-icon {
+    display: none;
+  }
 }
