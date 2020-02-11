@@ -19,13 +19,6 @@ const Navbar = props => {
         <li className={`${props.view === 'champions' ? 'current' : ''} nav-item`} onClick={() => props.changeView('champions')}>
           State Championship Appearances
         </li>
-        <input
-          type="text"
-          className="search"
-          placeholder="&#x1F50D; City, School, Mascot"
-          value={props.searchInput}
-          onChange={evt => props.handleSearchInput(evt.target.value)}
-        />
       </ul>
     </nav>
   );
