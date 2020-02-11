@@ -98,6 +98,13 @@ class App extends Component {
           searchInput={this.state.searchInput}
           view={this.state.view}
         />
+        <input
+          type="text"
+          className="search"
+          placeholder="&#x1F50D; City, School, Mascot"
+          // value={props.searchInput}
+          // onChange={evt => props.handleSearchInput(evt.target.value)}
+        />
         {this.renderView()}
         <Footer />
       </>
