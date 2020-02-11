@@ -71,13 +71,15 @@ body {
 }
 
 .search {
-  border: none;
+  border: 1px solid #aaa;
   border-radius: 5px;
   padding: 10px;
-  width: 200px;
+  width: 300px;
   color: #888;
   outline: none;
   font-size: 16px;
+  margin: 0 auto 40px auto;
+  display: flex;
 }
 
 .search:focus::-webkit-input-placeholder {
