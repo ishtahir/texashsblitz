@@ -10,10 +10,9 @@ const EnrollView = props => {
           </th>
         </tr>
         <tr>
-          <th>School</th>
-          <th>Mascot</th>
-          <th>District</th>
-          <th>Enrollment</th>
+          <th className="school">School</th>
+          <th className="mascot">Mascot</th>
+          <th className="enrollment">Enrollment</th>
         </tr>
       </thead>
       <tbody>
@@ -22,7 +21,6 @@ const EnrollView = props => {
             <tr key={i} style={{ background: team.colors[0], color: team.colors[1] }}>
               <td className="school">{team.city ? `${team.city} ${team.school}` : `${team.school}`}</td>
               <td className="mascot">{team.mascot}</td>
-              <td className="district num">{team.district}</td>
               <td className="enrollment num">{team.enrollment}</td>
             </tr>
           );
