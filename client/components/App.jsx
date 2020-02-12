@@ -17,16 +17,30 @@ class App extends Component {
       searchInput: '',
       view: 'all',
       districts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32],
-      hamburger: false
+      hamburger: false,
+      isDesktop: true
     };
+
+    this.updateWidth = this.updateWidth.bind(this);
   }
 
   componentDidMount() {
     this.getAllTeams();
+    this.updateWidth();
+    window.addEventListener('resize', this.updateWidth);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWidth);
   }
 
   getAllTeams() {
     axios.get('/load').then(res => this.setState({ teams6A: res.data }, () => this.sort()));
+  }
+
+  updateWidth() {
+    let isDesktop = window.innerWidth > 800;
+    this.setState({ isDesktop });
   }
 
   changeView(view) {
@@ -74,13 +88,22 @@ class App extends Component {
 
   renderView() {
     if (this.state.view === 'all') {
-      return <All6ATeamsView teams={this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams} />;
+      return (
+        <All6ATeamsView teams={this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams} isDesktop={this.state.isDesktop} />
+      );
     } else if (this.state.view === 'district') {
-      return <DistrictView districts={this.state.districts} teams={this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams} />;
+      return (
+        <DistrictView
+          districts={this.state.districts}
+          teams={this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams}
+          isDesktop={this.state.isDesktop}
+        />
+      );
     } else if (this.state.view === 'enroll') {
       return (
         <EnrollView
           teams={(this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams).sort((a, b) => b.enrollment - a.enrollment)}
+          isDesktop={this.state.isDesktop}
         />
       );
     } else if (this.state.view === 'champions') {
