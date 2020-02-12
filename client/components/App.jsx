@@ -16,7 +16,8 @@ class App extends Component {
       filteredTeams: [],
       searchInput: '',
       view: 'all',
-      districts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+      districts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32],
+      hamburger: false
     };
   }
 
@@ -46,6 +47,11 @@ class App extends Component {
     );
 
     this.setState({ filteredTeams });
+  }
+
+  handleHamburger() {
+    let hamburger = !this.state.hamburger;
+    this.setState({ hamburger });
   }
 
   sort() {
@@ -95,6 +101,7 @@ class App extends Component {
         <Navbar
           changeView={this.changeView.bind(this)}
           handleSearchInput={this.handleSearchInput.bind(this)}
+          handleHamburger={this.handleHamburger.bind(this)}
           searchInput={this.state.searchInput}
           view={this.state.view}
         />
@@ -102,8 +109,9 @@ class App extends Component {
           type="text"
           className="search"
           placeholder="&#x1F50D; City, School, Mascot"
-          // value={props.searchInput}
-          // onChange={evt => props.handleSearchInput(evt.target.value)}
+          value={this.state.searchInput}
+          onChange={evt => this.handleSearchInput(evt.target.value)}
+          style={{ position: 'sticky', top: `${this.state.hamburger ? '267px' : '63px'}`, width: '100%' }}
         />
         {this.renderView()}
         <Footer />
