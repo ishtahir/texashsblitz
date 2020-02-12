@@ -10,10 +10,10 @@ const Teams6A = props => {
           </th>
         </tr>
         <tr>
-          <th>School</th>
-          <th>Mascot</th>
-          <th>District</th>
-          <th>Enrollment</th>
+          <th className="school">School</th>
+          <th className="mascot">Mascot</th>
+          <th className="district">District</th>
+          <th className="enrollment">Enroll</th>
         </tr>
       </thead>
       <tbody>
