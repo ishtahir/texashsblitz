@@ -20,7 +20,6 @@ body {
 .logo {
   font-family: 'Saira Stencil One', cursive;
   font-size: 40px;
-  /* color: #f36358; */
   background-color: #00f7ff;
   background-image: -webkit-linear-gradient(315deg, #ffffff 0%, #239700fd 64%);
   -webkit-background-clip: text;
@@ -46,7 +45,6 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* height: 100px; */
   background: #333;
   margin-bottom: 40px;
 }
@@ -60,19 +58,22 @@ body {
 .nav-item {
   margin-right: 20px;
   cursor: pointer;
-  padding: 5px 10px;
+  padding: 5px 60px;
   border-radius: 5px;
   color: #eee;
+  border-bottom: 1px solid #777;
 }
 
 .nav-item:hover {
-  background: #fc6c6c;
   color: #eee;
 }
 
 .search {
-  border: 1px solid #aaa;
-  border-radius: 5px;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  border-left: none;
+  border-right: none;
+  /* border-radius: 5px; */
   padding: 10px;
   width: 300px;
   color: #888;
@@ -126,8 +127,7 @@ td {
 }
 
 .current {
-  background: #fc6c6c;
-  color: #333;
+  color: #fc6c6c;
 }
 
 .footer {
@@ -157,9 +157,59 @@ td {
 
   .nav-item {
     margin-right: 0;
+    display: none;
   }
 
   .football-icon {
     display: none;
+  }
+
+  .logo {
+    text-align: right;
+    margin-left: 80px;
+  }
+
+  .nav-icon {
+    position: absolute;
+    cursor: pointer;
+    top: -5px;
+    left: -5px;
+    margin: 1em;
+    width: 40px;
+  }
+
+  .line1,
+  .line2,
+  .line3 {
+    background-color: #fff;
+    border-radius: 3px;
+    content: '';
+    display: block;
+    height: 5px;
+    margin: 7px 0;
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* .nav-icon:hover:before {
+    transform: translateY(12px) rotate(135deg);
+  }
+
+  .nav-icon:hover:after {
+    transform: translateY(-12px) rotate(-135deg);
+  }
+
+  .nav-icon:hover div {
+    transform: scale(0);
+  } */
+
+  .district {
+    display: none;
+  }
+
+  table {
+    padding: 5px;
+    margin: 0 5px 20px 5px;
+    border-width: 5px;
+    box-shadow: none;
   }
 }
