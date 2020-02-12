@@ -6,7 +6,7 @@ const StateAppearanceView = props => {
       <thead>
         <tr>
           <th colSpan="4" className="table-header">
-            UIL State Championship Appearances
+            State Championship Appearances
           </th>
         </tr>
         <tr>
