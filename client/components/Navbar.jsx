@@ -13,7 +13,7 @@ const Navbar = props => {
       </h1>
       <ul className="nav-items">
         <li className={`${props.view === 'all' ? 'current' : ''} nav-item`} onClick={() => props.changeView('all')}>
-          Classifications
+          Classes
         </li>
         <li className={`${props.view === 'district' ? 'current' : ''} nav-item`} onClick={() => props.changeView('district')}>
           Districts
