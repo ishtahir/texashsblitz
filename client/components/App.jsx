@@ -134,7 +134,7 @@ class App extends Component {
           placeholder="&#x1F50D; City, School, Mascot"
           value={this.state.searchInput}
           onChange={evt => this.handleSearchInput(evt.target.value)}
-          style={{ position: 'sticky', top: `${this.state.hamburger ? '267px' : '63px'}`, width: '100%' }}
+          style={{ position: 'sticky', top: `${this.state.hamburger ? '287px' : '63px'}` }}
         />
         {this.renderView()}
         <Footer />
