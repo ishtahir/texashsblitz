@@ -56,9 +56,9 @@ body {
 }
 
 .nav-item {
-  margin-right: 20px;
+  margin-right: 10px;
   cursor: pointer;
-  padding: 5px 30px;
+  padding: 5px 20px;
   border-radius: 5px;
   color: #eee;
 }
@@ -68,13 +68,9 @@ body {
 }
 
 .search {
-  border-top: 1px solid #aaa;
-  border-bottom: 1px solid #aaa;
-  border-left: none;
-  border-right: none;
-  /* border-radius: 5px; */
+  border: 1px solid #aaa;
   padding: 10px;
-  width: 200px;
+  width: 52%;
   color: #888;
   outline: none;
   font-size: 16px;
@@ -126,7 +122,6 @@ td {
 }
 
 .current {
-  color: #fc6c6c;
   background: #777;
 }
 
@@ -166,8 +161,11 @@ td {
   }
 
   .logo {
-    text-align: right;
-    margin-left: 80px;
+    font-size: 40px;
+  }
+
+  .blitz {
+    font-size: 45px;
   }
 
   .nav-icon {
@@ -220,8 +218,11 @@ td {
   }
 
   .logo {
-    text-align: right;
-    margin-left: 80px;
+    font-size: 40px;
+  }
+
+  .blitz {
+    font-size: 45px;
   }
 
   .nav-icon {
@@ -274,8 +275,11 @@ td {
   }
 
   .logo {
-    text-align: right;
-    margin-left: 80px;
+    font-size: 40px;
+  }
+
+  .blitz {
+    font-size: 45px;
   }
 
   .nav-icon {
@@ -302,6 +306,97 @@ td {
   table {
     padding: 5px;
     /* margin: 0 5px 20px 5px; */
+    border-width: 5px;
+    box-shadow: none;
+  }
+}
+
+@media only screen and (max-width: 828px) {
+  .football-icon {
+    width: 25px;
+  }
+
+  .logo {
+    font-size: 30px;
+  }
+
+  .blitz {
+    font-size: 35px;
+  }
+
+  .nav-items {
+    display: flex;
+    line-height: 40px;
+  }
+
+  .nav-item {
+    margin-right: 10px;
+    padding: 5px 10px;
+    width: 330px;
+  }
+
+  .nav-item:last-child {
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .nav-items {
+    flex-direction: column;
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .nav-item {
+    margin-right: 0;
+    display: none;
+    border-bottom: 1px solid #777;
+  }
+
+  .football-icon {
+    display: none;
+  }
+
+  .logo {
+    font-size: 40px;
+  }
+
+  .blitz {
+    font-size: 45px;
+  }
+
+  .nav-icon {
+    position: absolute;
+    cursor: pointer;
+    top: -5px;
+    left: -5px;
+    margin: 1em;
+    width: 40px;
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  .line1,
+  .line2,
+  .line3 {
+    background-color: #fff;
+    border-radius: 3px;
+    content: '';
+    display: block;
+    height: 5px;
+    margin: 7px 0;
+    transition: all 0.2s ease-in-out;
+  }
+
+  table {
+    padding: 5px;
     border-width: 5px;
     box-shadow: none;
   }
