@@ -10,32 +10,6 @@ body {
   color: #333;
 }
 
-.football-icon {
-  width: 30px;
-  filter: invert(99%) sepia(54%) saturate(67%) hue-rotate(239deg) brightness(113%) contrast(87%);
-}
-
-.texashs {
-  font-family: 'Saira Stencil One', cursive;
-  font-size: 40px;
-  background-color: #00f7ff;
-  background-image: -webkit-linear-gradient(315deg, #ffffff 0%, #239700fd 64%);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  cursor: pointer;
-}
-
-.blitz {
-  font-family: 'Ceviche One', cursive;
-  font-size: 45px;
-  background-color: #ff0000;
-  background-image: -webkit-linear-gradient(315deg, #ff0000 0%, #ffed00 74%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 .navbar {
   display: flex;
   flex-direction: column;
@@ -57,7 +31,7 @@ body {
   background-color: #fff;
   border-radius: 3px;
   display: block;
-  width: 45px;
+  width: 40px;
   height: 5px;
   margin: 7px 0;
   transition: all 0.2s ease-in-out;
@@ -78,6 +52,34 @@ body {
 .nav-items {
   list-style: none;
   width: 100%;
+}
+
+.football-icon {
+  display: none;
+}
+
+.texashs {
+  font-family: 'Saira Stencil One', cursive;
+  font-size: 40px;
+  background-color: #00f7ff;
+  background-image: -webkit-linear-gradient(315deg, #ffffff 0%, #239700fd 64%);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  cursor: pointer;
+  height: 63px;
+  text-align: right;
+  margin-right: 5%;
+}
+
+.blitz {
+  font-family: 'Ceviche One', cursive;
+  font-size: 45px;
+  background-color: #ff0000;
+  background-image: -webkit-linear-gradient(315deg, #ff0000 0%, #ffed00 74%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .nav-item {
@@ -105,4 +107,64 @@ body {
   font-size: 16px;
   margin: 0 auto 40px auto;
   display: flex;
+}
+
+.search:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+table {
+  text-align: center;
+  margin: 0 auto 30px auto;
+  font-family: 'Teko', sans-serif;
+  font-size: 26px;
+  font-weight: 300;
+  cursor: default;
+  border: 5px solid #797979;
+  padding: 5px;
+  width: 95%;
+}
+
+.table-header {
+  background: #333;
+  color: #eee;
+}
+
+.school {
+  max-width: 350px;
+}
+
+.mascot {
+  max-width: 220px;
+}
+
+.years {
+  padding: 10px;
+  text-align: center;
+}
+
+.current {
+  color: #333;
+  background: #ccc;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: auto;
+  background: #333;
+  height: 60px;
+}
+
+.footer p {
+  color: #eee;
+  font-size: 14px;
+}
+
+@media only screen and (min-width: 680px) {
+  body {
+    background: lightblue;
+  }
 }
