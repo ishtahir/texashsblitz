@@ -10,11 +10,9 @@ const District = props => {
           </th>
         </tr>
         <tr>
-          <th className="school">School</th>
-          <th className="mascot">Mascot</th>
-          <th className="enrollment" style={{ display: `${props.isDesktop ? 'table-cell' : 'none'}` }}>
-            Enrollment
-          </th>
+          <th>School</th>
+          <th>Mascot</th>
+          <th style={{ display: `${props.isDesktop ? 'table-cell' : 'none'}` }}>Enrollment</th>
         </tr>
       </thead>
       <tbody>
@@ -23,7 +21,7 @@ const District = props => {
             <tr key={`${team}${i}`} style={{ background: team.colors[0], color: team.colors[1] }}>
               <td className="school">{team.city ? `${team.city} ${team.school}` : `${team.school}`}</td>
               <td className="mascot">{team.mascot}</td>
-              <td className="enrollment num" style={{ display: `${props.isDesktop ? 'table-cell' : 'none'}` }}>
+              <td className="enroll" style={{ display: `${props.isDesktop ? 'table-cell' : 'none'}` }}>
                 {team.enrollment}
               </td>
             </tr>
