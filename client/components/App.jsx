@@ -17,7 +17,7 @@ class App extends Component {
       searchInput: '',
       view: 'all',
       districts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32],
-      hamburger: false,
+      hamburgerClicked: false,
       isDesktop: true
     };
 
@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   getAllTeams() {
-    axios.get('/load').then(res => this.setState({ teams6A: res.data }, () => this.sort()));
+    axios.get('/all').then(res => this.setState({ teams6A: res.data }, () => this.sort()));
   }
 
   updateWidth() {
@@ -64,24 +64,18 @@ class App extends Component {
   }
 
   handleHamburger() {
-    let hamburger = !this.state.hamburger;
-    this.setState({ hamburger });
+    let hamburgerClicked = !this.state.hamburgerClicked;
+    this.setState({ hamburgerClicked });
   }
 
   sort() {
     let sorted = this.state.teams6A.sort((a, b) => {
-      if (a.district < b.district) {
+      if ((a.city ? a.city : a.school).toLowerCase() < (b.city ? b.city : b.school).toLowerCase()) {
         return -1;
-      } else if (a.district > b.district) {
+      } else if ((a.city ? a.city : a.school).toLowerCase() > (b.city ? b.city : b.school).toLowerCase()) {
         return 1;
       } else {
-        if ((a.city ? a.city : a.school).toLowerCase() < (b.city ? b.city : b.school).toLowerCase()) {
-          return -1;
-        } else if ((a.city ? a.city : a.school).toLowerCase() > (b.city ? b.city : b.school).toLowerCase()) {
-          return 1;
-        } else {
-          return 0;
-        }
+        return 0;
       }
     });
   }
@@ -125,6 +119,7 @@ class App extends Component {
           changeView={this.changeView.bind(this)}
           handleSearchInput={this.handleSearchInput.bind(this)}
           handleHamburger={this.handleHamburger.bind(this)}
+          hamburgerClicked={this.state.hamburgerClicked}
           searchInput={this.state.searchInput}
           view={this.state.view}
         />
@@ -134,7 +129,7 @@ class App extends Component {
           placeholder="&#x1F50D; City, School, Mascot"
           value={this.state.searchInput}
           onChange={evt => this.handleSearchInput(evt.target.value)}
-          style={{ position: 'sticky', top: `${this.state.hamburger ? '287px' : '63px'}` }}
+          // style={{ position: 'sticky', top: `${this.state.hamburgerClicked ? '287px' : '63px'}` }}
         />
         {this.renderView()}
         <Footer />
