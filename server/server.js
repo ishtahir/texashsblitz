@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-const mongo = require('./mongo.js');
+// const mongo = require('./mongo.js');
 
 const app = express();
 const port = process.env.PORT || 4545;
