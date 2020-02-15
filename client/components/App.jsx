@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   updateWidth() {
-    let isDesktop = window.innerWidth > 800;
+    let isDesktop = window.innerWidth > 740;
     this.setState({ isDesktop });
   }
 
@@ -129,7 +129,6 @@ class App extends Component {
           placeholder="&#x1F50D; City, School, Mascot"
           value={this.state.searchInput}
           onChange={evt => this.handleSearchInput(evt.target.value)}
-          // style={{ position: 'sticky', top: `${this.state.hamburgerClicked ? '287px' : '63px'}` }}
         />
         {this.renderView()}
         <Footer />
