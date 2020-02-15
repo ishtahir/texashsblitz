@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   getAllTeams() {
-    axios.get('/all').then(res => this.setState({ teams6A: res.data }, () => this.sort()));
+    axios.get('/load').then(res => this.setState({ teams6A: res.data }, () => this.sort()));
   }
 
   updateWidth() {
