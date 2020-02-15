@@ -18,6 +18,8 @@ body {
   background: #333;
   color: #eee;
   text-align: center;
+  position: relative;
+  top: 0;
 }
 
 .hamburger-container {
@@ -54,7 +56,14 @@ body {
   width: 100%;
 }
 
+.logo-container {
+  text-align: right;
+  margin-right: 5%;
+}
+
 .football-icon {
+  width: 30px;
+  filter: invert(99%) sepia(54%) saturate(67%) hue-rotate(239deg) brightness(113%) contrast(87%);
   display: none;
 }
 
@@ -68,8 +77,6 @@ body {
   background-clip: text;
   cursor: pointer;
   height: 63px;
-  text-align: right;
-  margin-right: 5%;
 }
 
 .blitz {
@@ -82,10 +89,15 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.current {
+  color: #333;
+  background: #ccc;
+}
+
 .nav-item {
   background: #888;
   border-bottom: 1px solid #333;
-  flex: 0 1 90%;
+  /* flex: 0 1 90%; */
   padding: 10px 0;
   cursor: pointer;
 }
@@ -101,12 +113,14 @@ body {
 .search {
   border: 1px solid #aaa;
   padding: 10px;
-  width: 100%;
+  width: 75%;
   color: #888;
   outline: none;
   font-size: 16px;
   margin: 0 auto 40px auto;
   display: flex;
+  margin-top: 40px;
+  border-radius: 40px;
 }
 
 .search:focus::-webkit-input-placeholder {
@@ -143,11 +157,6 @@ table {
   text-align: center;
 }
 
-.current {
-  color: #333;
-  background: #ccc;
-}
-
 .footer {
   display: flex;
   justify-content: center;
@@ -163,8 +172,61 @@ table {
   font-size: 14px;
 }
 
-@media only screen and (min-width: 680px) {
-  body {
-    background: lightblue;
+@media only screen and (min-width: 740px) {
+  .navbar {
+    background: #333;
+    color: #eee;
+  }
+
+  .hamburger-container {
+    display: none;
+  }
+
+  .logo-container {
+    text-align: left;
+    margin-left: 5%;
+  }
+
+  .nav-items {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .football-icon {
+    display: inline-block;
+    width: 28px;
+  }
+
+  .texashs {
+    font-size: 35px;
+  }
+
+  .blitz {
+    font-size: 40px;
+  }
+
+  .nav-item {
+    display: block;
+    background: none;
+    border-bottom: none;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .current {
+    background: #aaa;
+    color: #333;
+  }
+
+  .search {
+    max-width: 500px;
+  }
+
+  table {
+    width: 70%;
+    border: 10px solid #797979;
+    padding: 20px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
   }
 }
