@@ -95,9 +95,7 @@ body {
 }
 
 .nav-item {
-  background: #888;
-  border-bottom: 1px solid #333;
-  /* flex: 0 1 90%; */
+  border-bottom: 1px solid #ccc;
   padding: 10px 0;
   cursor: pointer;
 }
@@ -212,6 +210,11 @@ table {
     border-bottom: none;
     padding: 10px;
     border-radius: 5px;
+  }
+
+  .nav-item:hover {
+    background: #ccc;
+    color: #333;
   }
 
   .current {
