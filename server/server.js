@@ -10,15 +10,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-app.get('/all', (req, res) => {
-  mongo.find({}).toArray((err, items) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(items);
-    }
-  });
-});
+// app.get('/all', (req, res) => {
+//   mongo.find({}).toArray((err, items) => {
+//     if (err) {
+//       res.send(err);
+//     } else {
+//       res.send(items);
+//     }
+//   });
+// });
 
 app.get('/load', (req, res) => {
   axios
