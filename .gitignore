@@ -5,4 +5,4 @@ package-lock.json
 node_modules
 server/mongo.js
 public/bundle.js
-
+public/style2.css
