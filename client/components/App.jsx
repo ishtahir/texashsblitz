@@ -126,7 +126,7 @@ class App extends Component {
         <input
           type="text"
           className="search"
-          placeholder="&#x1F50D; City, School, Mascot"
+          placeholder="&#x1F50D; Filter by city, school, mascot"
           value={this.state.searchInput}
           onChange={evt => this.handleSearchInput(evt.target.value)}
         />
