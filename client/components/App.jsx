@@ -13,6 +13,7 @@ class App extends Component {
 
     this.state = {
       allTeamsClasses: [],
+      currentClassTeams: [],
       filteredTeams: [],
       searchInput: '',
       view: 'classes',
@@ -36,7 +37,7 @@ class App extends Component {
   }
 
   getAllTeams() {
-    axios.get('/all').then(res => this.setState({ allTeamsClasses: res.data }, () => this.sort()));
+    axios.get('/all').then(res => this.setState({ allTeamsClasses: res.data }, () => this.updateCurrentClassTeams()));
   }
 
   updateWidth() {
@@ -52,8 +53,15 @@ class App extends Component {
     this.setState({ searchInput }, () => this.handleFilteredTeams());
   }
 
+  updateCurrentClassTeams() {
+    const currentClassTeams = this.state.allTeamsClasses
+      .filter(team => team.class === this.state.currentClass)
+      .sort((a, b) => (a.city ? a.city : a.school - b.city ? b.city : b.school));
+    this.setState({ currentClassTeams });
+  }
+
   handleFilteredTeams() {
-    const filteredTeams = this.state.allTeamsClasses.filter(
+    const filteredTeams = this.state.currentClassTeams.filter(
       team =>
         `${team.city.toLowerCase()} ${team.school.toLowerCase()} ${team.mascot.toLowerCase()}`.includes(this.state.searchInput.toLowerCase()) ||
         team.city.toLowerCase().includes(this.state.searchInput.toLowerCase()) ||
@@ -70,7 +78,7 @@ class App extends Component {
   }
 
   handleCurrentClass(currentClass) {
-    this.setState({ currentClass });
+    this.setState({ currentClass }, () => this.updateCurrentClassTeams());
   }
 
   sort() {
@@ -95,11 +103,7 @@ class App extends Component {
     if (this.state.view === 'classes') {
       return (
         <ClassesView
-          teams={
-            this.state.searchInput === ''
-              ? this.state.allTeamsClasses.filter(team => team.class === this.state.currentClass)
-              : this.state.filteredTeams
-          }
+          teams={this.state.searchInput === '' ? this.state.currentClassTeams : this.state.filteredTeams}
           isDesktop={this.state.isDesktop}
           currentClass={this.state.currentClass}
         />
@@ -108,11 +112,7 @@ class App extends Component {
       return (
         <DistrictView
           districts={this.state.districts}
-          teams={
-            this.state.searchInput === ''
-              ? this.state.allTeamsClasses.filter(team => team.class === this.state.currentClass)
-              : this.state.filteredTeams
-          }
+          teams={this.state.searchInput === '' ? this.state.currentClassTeams : this.state.filteredTeams}
           isDesktop={this.state.isDesktop}
           currentClass={this.state.currentClass}
         />
@@ -120,10 +120,9 @@ class App extends Component {
     } else if (this.state.view === 'enroll') {
       return (
         <EnrollView
-          teams={(this.state.searchInput === ''
-            ? this.state.allTeamsClasses.filter(team => team.class === this.state.currentClass)
-            : this.state.filteredTeams
-          ).sort((a, b) => b.enrollment - a.enrollment)}
+          teams={(this.state.searchInput === '' ? this.state.currentClassTeams : this.state.filteredTeams).sort(
+            (a, b) => b.enrollment - a.enrollment
+          )}
           isDesktop={this.state.isDesktop}
           currentClass={this.state.currentClass}
         />
@@ -131,10 +130,7 @@ class App extends Component {
     } else if (this.state.view === 'champions') {
       return (
         <StateAppearanceView
-          teams={(this.state.searchInput === ''
-            ? this.state.allTeamsClasses.filter(team => team.class === this.state.currentClass)
-            : this.state.filteredTeams
-          )
+          teams={(this.state.searchInput === '' ? this.state.currentClassTeams : this.state.filteredTeams)
             .filter(team => team.stateAppearances.length > 0)
             .sort((a, b) => b.stateAppearances.length - a.stateAppearances.length)}
           currentClass={this.state.currentClass}
