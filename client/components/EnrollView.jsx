@@ -6,7 +6,7 @@ const EnrollView = props => {
       <thead>
         <tr>
           <th colSpan="2" className="table-header">
-            Class 6A by Enrollment
+            Class {props.currentClass}A by Enrollment
           </th>
         </tr>
         <tr>
