@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import All6ATeamsView from './All6ATeamsView';
 import Navbar from './Navbar';
+import ClassesView from './ClassesView';
 import DistrictView from './DistrictView';
-import StateAppearanceView from './StateAppearanceView';
 import EnrollView from './EnrollView';
+import StateAppearanceView from './StateAppearanceView';
 import Footer from './Footer';
 import axios from 'axios';
 
@@ -12,13 +12,14 @@ class App extends Component {
     super();
 
     this.state = {
-      teams6A: [],
+      allTeamsClasses: [],
       filteredTeams: [],
       searchInput: '',
-      view: 'all',
+      view: 'classes',
       districts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32],
       hamburgerClicked: false,
-      isDesktop: true
+      isDesktop: true,
+      currentClass: 6
     };
 
     this.updateWidth = this.updateWidth.bind(this);
@@ -35,7 +36,7 @@ class App extends Component {
   }
 
   getAllTeams() {
-    axios.get('/load').then(res => this.setState({ teams6A: res.data }, () => this.sort()));
+    axios.get('/all').then(res => this.setState({ allTeamsClasses: res.data }, () => this.sort()));
   }
 
   updateWidth() {
@@ -52,7 +53,7 @@ class App extends Component {
   }
 
   handleFilteredTeams() {
-    const filteredTeams = this.state.teams6A.filter(
+    const filteredTeams = this.state.allTeamsClasses.filter(
       team =>
         `${team.city.toLowerCase()} ${team.school.toLowerCase()} ${team.mascot.toLowerCase()}`.includes(this.state.searchInput.toLowerCase()) ||
         team.city.toLowerCase().includes(this.state.searchInput.toLowerCase()) ||
@@ -68,44 +69,75 @@ class App extends Component {
     this.setState({ hamburgerClicked });
   }
 
+  handleCurrentClass(currentClass) {
+    this.setState({ currentClass });
+  }
+
   sort() {
-    let sorted = this.state.teams6A.sort((a, b) => {
-      if ((a.city ? a.city : a.school).toLowerCase() < (b.city ? b.city : b.school).toLowerCase()) {
-        return -1;
-      } else if ((a.city ? a.city : a.school).toLowerCase() > (b.city ? b.city : b.school).toLowerCase()) {
+    let sorted = this.state.allTeamsClasses.sort((a, b) => {
+      if (a.class < b.class) {
         return 1;
+      } else if (b.class < a.class) {
+        return -1;
       } else {
-        return 0;
+        if ((a.city ? a.city : a.school) < (b.city ? b.city : b.school)) {
+          return -1;
+        } else if ((a.city ? a.city : a.school) > (b.city ? b.city : b.school)) {
+          return 1;
+        } else {
+          return 0;
+        }
       }
     });
   }
 
   renderView() {
-    if (this.state.view === 'all') {
+    if (this.state.view === 'classes') {
       return (
-        <All6ATeamsView teams={this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams} isDesktop={this.state.isDesktop} />
+        <ClassesView
+          teams={
+            this.state.searchInput === ''
+              ? this.state.allTeamsClasses.filter(team => team.class === this.state.currentClass)
+              : this.state.filteredTeams
+          }
+          isDesktop={this.state.isDesktop}
+          currentClass={this.state.currentClass}
+        />
       );
     } else if (this.state.view === 'district') {
       return (
         <DistrictView
           districts={this.state.districts}
-          teams={this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams}
+          teams={
+            this.state.searchInput === ''
+              ? this.state.allTeamsClasses.filter(team => team.class === this.state.currentClass)
+              : this.state.filteredTeams
+          }
           isDesktop={this.state.isDesktop}
+          currentClass={this.state.currentClass}
         />
       );
     } else if (this.state.view === 'enroll') {
       return (
         <EnrollView
-          teams={(this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams).sort((a, b) => b.enrollment - a.enrollment)}
+          teams={(this.state.searchInput === ''
+            ? this.state.allTeamsClasses.filter(team => team.class === this.state.currentClass)
+            : this.state.filteredTeams
+          ).sort((a, b) => b.enrollment - a.enrollment)}
           isDesktop={this.state.isDesktop}
+          currentClass={this.state.currentClass}
         />
       );
     } else if (this.state.view === 'champions') {
       return (
         <StateAppearanceView
-          teams={(this.state.searchInput === '' ? this.state.teams6A : this.state.filteredTeams)
+          teams={(this.state.searchInput === ''
+            ? this.state.allTeamsClasses.filter(team => team.class === this.state.currentClass)
+            : this.state.filteredTeams
+          )
             .filter(team => team.stateAppearances.length > 0)
             .sort((a, b) => b.stateAppearances.length - a.stateAppearances.length)}
+          currentClass={this.state.currentClass}
         />
       );
     }
@@ -130,6 +162,14 @@ class App extends Component {
           value={this.state.searchInput}
           onChange={evt => this.handleSearchInput(evt.target.value)}
         />
+        <select onChange={evt => this.handleCurrentClass(Number(evt.target.value))}>
+          <option value="6">Class 6A</option>
+          <option value="5">Class 5A</option>
+          <option value="4">Class 4A</option>
+          <option value="3">Class 3A</option>
+          <option value="2">Class 2A</option>
+          <option value="1">Class 1A</option>
+        </select>
         {this.renderView()}
         <Footer />
       </>
