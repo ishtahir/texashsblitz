@@ -15,8 +15,8 @@ const Navbar = props => {
           </h1>
         </div>
         <li
-          className={`${props.view === 'all' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
-          onClick={() => props.changeView('all')}
+          className={`${props.view === 'classes' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
+          onClick={() => props.changeView('classes')}
         >
           Classes
         </li>
