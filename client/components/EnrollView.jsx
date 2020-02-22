@@ -1,12 +1,14 @@
 import React from 'react';
 
 const EnrollView = props => {
+  let header = `Class ${props.currentClass}A by Enrollment`;
+  let headerAll = 'All Teams by Enrollment';
   return (
     <table>
       <thead>
         <tr>
           <th colSpan="2" className="table-header">
-            Class {props.currentClass}A by Enrollment
+            {props.currentClass > 6 ? headerAll : header}
           </th>
         </tr>
         <tr>
