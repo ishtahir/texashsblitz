@@ -21,9 +21,6 @@ app.use(express.static('public'));
 //     }
 //   });
 // });
-console.log(url);
-console.log('');
-console.log(process.env.API_URL);
 app.get('/load', (req, res) => {
   axios
     .get(url)
