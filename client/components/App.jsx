@@ -211,7 +211,7 @@ class App extends Component {
           onChange={evt => this.handleSearchInput(evt.target.value)}
         />
         <div className="class-div-select-btn">
-          <label>Change Classification:</label>
+          <label className="text-desc">Change Classification:</label>
           <select className="dropdown" onChange={evt => this.handleCurrentClass(Number(evt.target.value))}>
             <option value="6">Class 6A</option>
             <option value="5">Class 5A</option>
@@ -233,7 +233,7 @@ class App extends Component {
           ) : null}
         </div>
 
-        <p className="total-count">
+        <p className="text-desc">
           Total Teams:{' '}
           {this.state.searchInput === '' ? (
             <span className="total-number">{this.state.currentDivisionTeams.length}</span>
