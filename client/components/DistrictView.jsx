@@ -8,6 +8,8 @@ const DistrictView = props => {
       district={district}
       teams={props.teams.filter(team => team.district === district)}
       isDesktop={props.isDesktop}
+      currentClass={props.currentClass}
+      currentDivision={props.currentDivision}
     />
   ));
 };
