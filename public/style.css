@@ -127,6 +127,7 @@ body {
 
 .class-div-select-btn {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-bottom: 40px;
@@ -143,7 +144,8 @@ body {
   text-align: center;
   outline: none;
   cursor: pointer;
-  margin-left: 5px;
+  margin: 5px 0;
+  width: 50%;
 }
 
 .btn {
@@ -152,6 +154,8 @@ body {
   border-radius: 6px;
   cursor: pointer;
   outline: none;
+  margin: 5px 0;
+  width: 50%;
 }
 
 .btn:hover {
@@ -262,6 +266,19 @@ table {
 
   .search {
     max-width: 500px;
+  }
+
+  .class-div-select-btn {
+    flex-direction: row;
+  }
+
+  .dropdown {
+    width: 100px;
+    margin-left: 10px;
+  }
+
+  .btn {
+    width: auto;
   }
 
   table {
