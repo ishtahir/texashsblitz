@@ -12,7 +12,7 @@ const ClassesView = props => {
           </th>
         </tr>
         <tr>
-          <th>{props.currentClass > 6 ? 'School/Mascot' : 'School'}</th>
+          <th>School</th>
           <th style={{ display: props.currentClass > 6 ? 'none' : 'table-cell' }}>Mascot</th>
           <th style={{ display: `${props.isDesktop || props.currentClass > 6 ? 'table-cell' : 'none'}` }}>
             {props.currentClass > 6 ? 'Class' : 'Enrollment'}
