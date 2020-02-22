@@ -173,7 +173,13 @@ class App extends Component {
         />
       );
     } else if (this.state.view === 'enroll') {
-      return <EnrollView teams={mainTeams} isDesktop={this.state.isDesktop} currentClass={this.state.currentClass} />;
+      return (
+        <EnrollView
+          teams={mainTeams.sort((a, b) => b.enrollment - a.enrollment)}
+          isDesktop={this.state.isDesktop}
+          currentClass={this.state.currentClass}
+        />
+      );
     } else if (this.state.view === 'appearances') {
       return (
         <StateAppearanceView
