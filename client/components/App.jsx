@@ -73,9 +73,14 @@ class App extends Component {
   }
 
   handleCurrentDivisionTeams() {
-    const currentDivisionTeams = this.state.allTeamsClasses
-      .filter(team => team.division === this.state.currentDivision && team.class === this.state.currentClass)
-      .sort((a, b) => (a.city ? a.city : a.school - b.city ? b.city : b.school));
+    let currentDivisionTeams;
+    if (this.state.currentClass > 6) {
+      currentDivisionTeams = this.state.allTeamsClasses;
+    } else {
+      currentDivisionTeams = this.state.allTeamsClasses
+        .filter(team => team.division === this.state.currentDivision && team.class === this.state.currentClass)
+        .sort((a, b) => (a.city ? a.city : a.school - b.city ? b.city : b.school));
+    }
     this.setState({ currentDivisionTeams });
   }
 
@@ -228,16 +233,14 @@ class App extends Component {
           ) : null}
         </div>
 
-        {this.state.currentClass > 6 ? (
-          <p className="total-count">
-            Total Teams:{' '}
-            {this.state.searchInput === '' ? (
-              <span className="total-number">{this.state.allTeamsClasses.length}</span>
-            ) : (
-              <span className="total-number">{this.state.filteredTeams.length}</span>
-            )}
-          </p>
-        ) : null}
+        <p className="total-count">
+          Total Teams:{' '}
+          {this.state.searchInput === '' ? (
+            <span className="total-number">{this.state.currentDivisionTeams.length}</span>
+          ) : (
+            <span className="total-number">{this.state.filteredTeams.length}</span>
+          )}
+        </p>
 
         {this.renderView()}
         <Footer />
