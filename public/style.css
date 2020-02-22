@@ -181,11 +181,11 @@ table {
 }
 
 .school {
-  max-width: 350px;
+  width: 220px;
 }
 
 .mascot {
-  max-width: 220px;
+  width: 110px;
 }
 
 .years {
@@ -269,5 +269,13 @@ table {
     border: 10px solid #797979;
     padding: 20px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .school {
+    width: 350px;
+  }
+
+  .mascot {
+    width: 200px;
   }
 }
