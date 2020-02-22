@@ -328,4 +328,8 @@ tr:nth-child(2n + 1) {
   .mascot {
     width: 200px;
   }
+
+  .change {
+    margin-bottom: 40px;
+  }
 }
