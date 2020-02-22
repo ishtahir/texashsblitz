@@ -86,9 +86,9 @@ class App extends Component {
 
   handleFilteredTeams() {
     let currentTeams;
-    if (this.state.view === 'appearances') {
+    if (this.state.view === 'appearances' && this.state.currentClass <= 6) {
       currentTeams = this.state.currentClassTeams;
-    } else if (this.state.view === 'classes' && this.state.currentClass > 6) {
+    } else if ((this.state.view === 'classes' && this.state.currentClass > 6) || (this.state.currentClass > 6 && this.state.view === 'appearances')) {
       currentTeams = this.state.allTeamsClasses;
     } else {
       currentTeams = this.state.currentDivisionTeams;
@@ -146,9 +146,9 @@ class App extends Component {
 
   renderView() {
     let mainTeams;
-    if (this.state.currentClass > 6) {
+    if (this.state.currentClass > 6 && this.state.view === '') {
       mainTeams = this.state.allTeamsClasses;
-    } else if (this.state.currentClass <= 6 && this.state.searchInput !== '') {
+    } else if (this.state.searchInput !== '') {
       mainTeams = this.state.filteredTeams.sort(this.sort);
     } else {
       mainTeams = this.state.currentDivisionTeams;
@@ -225,14 +225,16 @@ class App extends Component {
           ) : null}
         </div>
 
-        <p className="text-desc">
-          Total Teams:{' '}
-          {this.state.searchInput === '' ? (
-            <span className="total-number">{this.state.currentDivisionTeams.length}</span>
-          ) : (
-            <span className="total-number">{this.state.filteredTeams.length}</span>
-          )}
-        </p>
+        {this.state.currentClass > 6 && this.state.view === 'district' ? null : (
+          <p className="text-desc">
+            Total Teams:{' '}
+            {this.state.searchInput === '' ? (
+              <span className="total-number">{this.state.currentDivisionTeams.length}</span>
+            ) : (
+              <span className="total-number">{this.state.filteredTeams.length}</span>
+            )}
+          </p>
+        )}
 
         {this.renderView()}
         <Footer />
