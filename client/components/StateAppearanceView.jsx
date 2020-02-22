@@ -1,12 +1,14 @@
 import React from 'react';
 
 const StateAppearanceView = props => {
+  let header = `${props.currentClass}A State Championship Appearances`;
+  let headerAll = 'All Teams State Championship Appearances';
   return (
     <table>
       <thead>
         <tr>
           <th colSpan="4" className="table-header">
-            {props.currentClass}A State Championship Appearances
+            {props.currentClass > 6 ? headerAll : header}
           </th>
         </tr>
         <tr>
