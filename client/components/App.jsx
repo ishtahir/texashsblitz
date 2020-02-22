@@ -148,13 +148,15 @@ class App extends Component {
     let mainTeams;
     if (this.state.currentClass > 6) {
       mainTeams = this.state.allTeamsClasses;
+    } else if (this.state.currentClass <= 6 && this.state.searchInput !== '') {
+      mainTeams = this.state.filteredTeams.sort(this.sort);
     } else {
       mainTeams = this.state.currentDivisionTeams;
     }
     if (this.state.view === 'classes') {
       return (
         <ClassesView
-          teams={(this.state.searchInput === '' ? mainTeams : this.state.filteredTeams).sort(this.sort)}
+          teams={mainTeams}
           isDesktop={this.state.isDesktop}
           currentClass={this.state.currentClass}
           currentDivision={this.state.currentDivision}
@@ -164,28 +166,18 @@ class App extends Component {
       return (
         <DistrictView
           districts={this.state.districts}
-          teams={this.state.searchInput === '' ? this.state.currentDivisionTeams : this.state.filteredTeams}
+          teams={mainTeams}
           isDesktop={this.state.isDesktop}
           currentClass={this.state.currentClass}
           currentDivision={this.state.currentDivision}
         />
       );
     } else if (this.state.view === 'enroll') {
-      return (
-        <EnrollView
-          teams={(this.state.searchInput === '' ? this.state.currentClassTeams : this.state.filteredTeams).sort(
-            (a, b) => b.enrollment - a.enrollment
-          )}
-          isDesktop={this.state.isDesktop}
-          currentClass={this.state.currentClass}
-        />
-      );
+      return <EnrollView teams={mainTeams} isDesktop={this.state.isDesktop} currentClass={this.state.currentClass} />;
     } else if (this.state.view === 'appearances') {
       return (
         <StateAppearanceView
-          teams={(this.state.searchInput === '' ? this.state.currentClassTeams : this.state.filteredTeams)
-            .filter(team => team.stateAppearances.length > 0)
-            .sort((a, b) => b.stateAppearances.length - a.stateAppearances.length)}
+          teams={mainTeams.filter(team => team.stateAppearances.length > 0).sort((a, b) => b.stateAppearances.length - a.stateAppearances.length)}
           currentClass={this.state.currentClass}
         />
       );
