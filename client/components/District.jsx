@@ -6,7 +6,9 @@ const District = props => {
       <thead>
         <tr>
           <th colSpan="3" className="table-header">
-            Class {props.currentClass}A District {props.district}
+            {props.currentClass < 6
+              ? `Class ${props.currentClass}A D${props.currentDivision} District ${props.district}`
+              : `Class ${props.currentClass}A District ${props.district}`}
           </th>
         </tr>
         <tr>
