@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-const url = require('./url.js');
 // const mongo = require('./mongo.js');
 
 const app = express();
@@ -23,7 +22,7 @@ app.use(express.static('public'));
 
 app.get('/load', (req, res) => {
   axios
-    .get(url)
+    .get(process.env.API_URL)
     .then(response => {
       res.send(response.data);
     })
