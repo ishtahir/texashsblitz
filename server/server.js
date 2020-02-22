@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-const url = require('./url.js');
+// const url = require('./url.js');
 // const mongo = require('./mongo.js');
 
 const app = express();
@@ -23,7 +23,7 @@ app.use(express.static('public'));
 
 app.get('/load', (req, res) => {
   axios
-    .get(url)
+    .get('https://txhsfb.s3.us-east-2.amazonaws.com/2019-6a.json')
     .then(response => {
       res.send(response.data);
     })
