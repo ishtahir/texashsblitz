@@ -7,7 +7,7 @@ const ClassesView = props => {
       <thead>
         <tr>
           <th colSpan="3" className="table-header">
-            {props.currentClass === 6 ? header : `${header} Division ${props.currentDivision}`}
+            {props.currentClass === 6 ? header : `${header} D${props.currentDivision}`}
           </th>
         </tr>
         <tr>
