@@ -1,12 +1,13 @@
 import React from 'react';
 
 const ClassesView = props => {
+  let header = `${props.currentClass}A Classification (${'A'.repeat(props.currentClass)})`;
   return (
     <table>
       <thead>
         <tr>
           <th colSpan="3" className="table-header">
-            {props.currentClass}A Classification ({'A'.repeat(props.currentClass)})
+            {props.currentClass === 6 ? header : `${header} Division ${props.currentDivision}`}
           </th>
         </tr>
         <tr>
