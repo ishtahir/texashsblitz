@@ -79,7 +79,13 @@ class App extends Component {
   }
 
   handleFilteredTeams() {
-    const filteredTeams = this.state.currentDivisionTeams.filter(
+    let currentTeams;
+    if (this.state.view === 'appearances') {
+      currentTeams = this.state.currentClassTeams;
+    } else {
+      currentTeams = this.state.currentDivisionTeams;
+    }
+    const filteredTeams = currentTeams.filter(
       team =>
         `${team.city.toLowerCase()} ${team.school.toLowerCase()} ${team.mascot.toLowerCase()}`.includes(this.state.searchInput.toLowerCase()) ||
         team.city.toLowerCase().includes(this.state.searchInput.toLowerCase()) ||
@@ -190,7 +196,7 @@ class App extends Component {
             <option value="2">Class 2A</option>
             <option value="1">Class 1A</option>
           </select>
-          {this.state.view !== 'appearances' && this.state.currentClass < 6 ? (
+          {this.state.view !== 'appearances' && this.state.view !== 'enroll' && this.state.currentClass < 6 ? (
             <>
               <button className="div1-btn btn" onClick={() => this.handleCurrentDivision(1)}>
                 Division 1
