@@ -3,7 +3,7 @@ import District from './District';
 
 const DistrictView = props => {
   return props.currentClass > 6 ? (
-    <p className="text-desc">Please change to a specific class.</p>
+    <p className="text-desc change">Please change to a specific class.</p>
   ) : (
     props.districts.map(district => (
       <District
