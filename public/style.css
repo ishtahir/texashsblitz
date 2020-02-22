@@ -214,6 +214,10 @@ tr:nth-child(2n + 1) {
   width: 110px;
 }
 
+.class-all {
+  width: 100px;
+}
+
 .years {
   padding: 10px;
   text-align: center;
@@ -253,6 +257,7 @@ tr:nth-child(2n + 1) {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    font-size: 14px;
   }
 
   .football-icon {
@@ -272,7 +277,7 @@ tr:nth-child(2n + 1) {
     display: block;
     background: none;
     border-bottom: none;
-    padding: 10px;
+    padding: 10px 5px;
     border-radius: 5px;
   }
 
