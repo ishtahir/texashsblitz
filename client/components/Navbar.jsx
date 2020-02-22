@@ -16,25 +16,25 @@ const Navbar = props => {
         </div>
         <li
           className={`${props.view === 'classes' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
-          onClick={() => props.changeView('classes')}
+          onClick={() => props.handleChangeView('classes')}
         >
           Classes
         </li>
         <li
           className={`${props.view === 'district' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
-          onClick={() => props.changeView('district')}
+          onClick={() => props.handleChangeView('district')}
         >
           Districts
         </li>
         <li
           className={`${props.view === 'enroll' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
-          onClick={() => props.changeView('enroll')}
+          onClick={() => props.handleChangeView('enroll')}
         >
           Enrollment
         </li>
         <li
-          className={`${props.view === 'champions' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
-          onClick={() => props.changeView('champions')}
+          className={`${props.view === 'appearances' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
+          onClick={() => props.handleChangeView('appearances')}
         >
           State Appearances
         </li>
