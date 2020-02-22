@@ -1,14 +1,16 @@
 import React from 'react';
 
 const District = props => {
+  let header =
+    props.currentClass < 6
+      ? `Class ${props.currentClass}A D${props.currentDivision} District ${props.district}`
+      : `Class ${props.currentClass}A District ${props.district}`;
   return props.teams.length > 0 ? (
     <table>
       <thead>
         <tr>
           <th colSpan="3" className="table-header">
-            {props.currentClass < 6
-              ? `Class ${props.currentClass}A D${props.currentDivision} District ${props.district}`
-              : `Class ${props.currentClass}A District ${props.district}`}
+            {header}
           </th>
         </tr>
         <tr>
