@@ -25,6 +25,7 @@ class App extends Component {
       currentDivision: 1
     };
 
+    this.sort = this.sort.bind(this);
     this.updateWidth = this.updateWidth.bind(this);
   }
 
@@ -82,6 +83,8 @@ class App extends Component {
     let currentTeams;
     if (this.state.view === 'appearances') {
       currentTeams = this.state.currentClassTeams;
+    } else if (this.state.view === 'classes' && this.state.currentClass > 6) {
+      currentTeams = this.state.allTeamsClasses;
     } else {
       currentTeams = this.state.currentDivisionTeams;
     }
@@ -111,11 +114,7 @@ class App extends Component {
   }
 
   sort(a, b) {
-    if (a.class < b.class) {
-      return 1;
-    } else if (b.class < a.class) {
-      return -1;
-    } else {
+    if (this.state.currentClass > 6) {
       if ((a.city ? a.city : a.school) < (b.city ? b.city : b.school)) {
         return -1;
       } else if ((a.city ? a.city : a.school) > (b.city ? b.city : b.school)) {
@@ -123,14 +122,34 @@ class App extends Component {
       } else {
         return 0;
       }
+    } else {
+      if (a.class < b.class) {
+        return 1;
+      } else if (b.class < a.class) {
+        return -1;
+      } else {
+        if ((a.city ? a.city : a.school) < (b.city ? b.city : b.school)) {
+          return -1;
+        } else if ((a.city ? a.city : a.school) > (b.city ? b.city : b.school)) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
     }
   }
 
   renderView() {
+    let mainTeams;
+    if (this.state.currentClass > 6) {
+      mainTeams = this.state.allTeamsClasses;
+    } else {
+      mainTeams = this.state.currentDivisionTeams;
+    }
     if (this.state.view === 'classes') {
       return (
         <ClassesView
-          teams={(this.state.searchInput === '' ? this.state.currentDivisionTeams : this.state.filteredTeams).sort(this.sort)}
+          teams={(this.state.searchInput === '' ? mainTeams : this.state.filteredTeams).sort(this.sort)}
           isDesktop={this.state.isDesktop}
           currentClass={this.state.currentClass}
           currentDivision={this.state.currentDivision}
@@ -195,6 +214,7 @@ class App extends Component {
             <option value="3">Class 3A</option>
             <option value="2">Class 2A</option>
             <option value="1">Class 1A</option>
+            <option value="7">ALL TEAMS</option>
           </select>
           {this.state.view !== 'appearances' && this.state.view !== 'enroll' && this.state.currentClass < 6 ? (
             <>
@@ -207,6 +227,17 @@ class App extends Component {
             </>
           ) : null}
         </div>
+
+        {this.state.currentClass > 6 ? (
+          <p className="total-count">
+            Total Teams:{' '}
+            {this.state.searchInput === '' ? (
+              <span className="total-number">{this.state.allTeamsClasses.length}</span>
+            ) : (
+              <span className="total-number">{this.state.filteredTeams.length}</span>
+            )}
+          </p>
+        ) : null}
 
         {this.renderView()}
         <Footer />
