@@ -28,7 +28,7 @@ const ClassesView = props => {
                   ? team.city
                     ? `${team.city} ${team.school} ${team.mascot}`
                     : `${team.school} ${team.mascot}`
-                  : `${team.school}`}
+                  : `${team.city} ${team.school}`}
               </td>
               <td className="mascot" style={{ display: props.currentClass > 6 ? 'none' : 'table-cell' }}>
                 {team.mascot}
