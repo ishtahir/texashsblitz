@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 const urlFile = require('./url.js');
-const mongo = require('./mongo.js');
-// let mongo;
+// const mongo = require('./mongo.js');
+let mongo;
 
 const app = express();
 const port = process.env.PORT || 4545;
