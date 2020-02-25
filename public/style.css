@@ -108,6 +108,17 @@ body {
   display: block;
 }
 
+.search-container {
+  position: relative;
+}
+
+.clear-search {
+  position: absolute;
+  top: 30%;
+  right: 17%;
+  cursor: pointer;
+}
+
 .search {
   border: 1px solid #aaa;
   border-radius: 40px;
