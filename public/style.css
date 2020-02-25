@@ -155,7 +155,7 @@ body {
   outline: none;
   cursor: pointer;
   margin: 5px 0;
-  width: 50%;
+  width: 120px;
 }
 
 .btn {
@@ -312,7 +312,6 @@ tr:nth-child(2n + 1) {
   }
 
   .dropdown {
-    width: 120px;
     margin-left: 10px;
   }
 
