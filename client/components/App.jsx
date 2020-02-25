@@ -93,11 +93,7 @@ class App extends Component {
         if (this.state.view === 'appearances') {
           currentlyDisplayingTeams = this.state.filteredTeams;
         } else {
-          if (this.state.view === 'appearances') {
-            currentlyDisplayingTeams = this.state.currentClassTeams;
-          } else {
-            currentlyDisplayingTeams = this.state.currentDivisionTeams;
-          }
+          currentlyDisplayingTeams = this.state.currentDivisionTeams;
         }
       }
     } else {
