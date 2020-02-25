@@ -57,7 +57,7 @@ class App extends Component {
   }
 
   handleChangeView(view) {
-    this.setState({ view }, () => this.handleFilteredTeams());
+    this.setState({ view }, this.handleFilteredTeams);
   }
 
   handleCurrentClass(classDivision) {
@@ -65,9 +65,7 @@ class App extends Component {
     const currentDivision = currentClass === 6 ? 1 : Number(classDivision.slice(1, 2));
     this.setState({ currentClass }, () => {
       this.handleCurrentClassTeams();
-      this.setState({ currentDivision }, () => {
-        this.handleCurrentDivisionTeams();
-      });
+      this.setState({ currentDivision }, this.handleCurrentDivisionTeams);
     });
   }
 
@@ -107,14 +105,14 @@ class App extends Component {
   }
 
   handleCurrentDivision(currentDivision) {
-    this.setState({ currentDivision }, () => this.handleCurrentDivisionTeams());
+    this.setState({ currentDivision }, this.handleCurrentDivisionTeams);
   }
 
   handleCurrentDivisionTeams() {
     let currentDivisionTeams = this.state.allTeamsClasses
       .filter(team => team.division === this.state.currentDivision && team.class === this.state.currentClass)
       .sort((a, b) => (a.city ? a.city : a.school - b.city ? b.city : b.school));
-    this.setState({ currentDivisionTeams }, () => this.handleFilteredTeams());
+    this.setState({ currentDivisionTeams }, this.handleFilteredTeams);
   }
 
   handleFilteredTeams() {
@@ -142,7 +140,7 @@ class App extends Component {
         team.mascot.toLowerCase().includes(this.state.searchInput.toLowerCase())
     );
 
-    this.setState({ filteredTeams }, () => this.handleCurrentlyDisplayingTeams());
+    this.setState({ filteredTeams }, this.handleCurrentlyDisplayingTeams);
   }
 
   handleHamburger() {
@@ -151,7 +149,11 @@ class App extends Component {
   }
 
   handleSearchInput(searchInput) {
-    this.setState({ searchInput }, () => this.handleFilteredTeams());
+    this.setState({ searchInput }, this.handleFilteredTeams);
+  }
+
+  resetSearchInput() {
+    this.setState({ searchInput: '' }, this.handleFilteredTeams);
   }
 
   updateWidth() {
@@ -268,13 +270,18 @@ class App extends Component {
           searchInput={this.state.searchInput}
           view={this.state.view}
         />
-        <input
-          type="text"
-          className="search"
-          placeholder="&#x1F50D; Filter by city, school, mascot"
-          value={this.state.searchInput}
-          onChange={evt => this.handleSearchInput(evt.target.value)}
-        />
+        <div className="search-container">
+          <input
+            type="text"
+            className="search"
+            placeholder="&#x1F50D; Filter by city, school, mascot"
+            value={this.state.searchInput}
+            onChange={evt => this.handleSearchInput(evt.target.value)}
+          />
+          <span style={{ display: this.state.searchInput ? 'inline' : 'none' }} className="clear-search" onClick={this.resetSearchInput.bind(this)}>
+            &#x2715;
+          </span>
+        </div>
         <div className="class-div-select">
           <label className="text-desc">Change Classification:</label>
           <select className="dropdown" onChange={evt => this.handleCurrentClass(evt.target.value)}>
