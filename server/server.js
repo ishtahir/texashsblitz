@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-const urlFile = require('./url.js');
+// const urlFile = require('./url.js');
 // const mongo = require('./mongo.js');
 let mongo;
 
