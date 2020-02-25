@@ -7,7 +7,7 @@ let mongo;
 
 const app = express();
 const port = process.env.PORT || 4545;
-const url = process.env.API_URL || urlFile;
+const url = process.env.API_URL; // || urlFile;
 const main = mongo ? 'local' : 'api';
 
 app.use(cors());
@@ -27,6 +27,8 @@ app.get(`/${main}`, (req, res) => {
     }
   });
 });
+
+console.log(url);
 
 app.get(`/${main}`, (req, res) => {
   axios
