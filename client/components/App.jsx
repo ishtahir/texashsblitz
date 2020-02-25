@@ -19,9 +19,10 @@ class App extends Component {
       currentlyDisplayingTeams: [],
       districts: [],
       searchInput: '',
-      view: 'classes',
+      route: '',
+      view: '',
       hamburgerClicked: false,
-      isDesktop: true,
+      isDesktop: false,
       currentClass: 6,
       currentDivision: 1
     };
@@ -31,8 +32,8 @@ class App extends Component {
   }
 
   componentDidMount() {
+    axios.get('/start').then(res => this.setState({ route: res.data, view: 'classes' }, this.getAllTeams));
     this.districtNumbers();
-    this.getAllTeams();
     this.updateWidth();
     window.addEventListener('resize', this.updateWidth);
   }
@@ -48,7 +49,7 @@ class App extends Component {
   }
 
   getAllTeams() {
-    axios.get('/mongo').then(res =>
+    axios.get(`/${this.state.route}`).then(res =>
       this.setState({ allTeamsClasses: res.data }, () => {
         this.handleCurrentClassTeams();
         this.handleCurrentDivisionTeams();
