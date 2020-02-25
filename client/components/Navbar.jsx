@@ -21,8 +21,8 @@ const Navbar = props => {
           Classes
         </li>
         <li
-          className={`${props.view === 'district' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
-          onClick={() => props.handleChangeView('district')}
+          className={`${props.view === 'districts' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
+          onClick={() => props.handleChangeView('districts')}
         >
           Districts
         </li>
