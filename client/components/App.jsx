@@ -14,20 +14,22 @@ class App extends Component {
     this.state = {
       allTeamsClasses: [],
       currentClassTeams: [],
-      filteredTeams: [],
-      currentDivisionTeams: [],
       currentlyDisplayingTeams: [],
+      currentDivisionTeams: [],
       districts: [],
+      filteredTeams: [],
       searchInput: '',
       view: '',
       hamburgerClicked: false,
       isDesktop: false,
       currentClass: 6,
-      currentDivision: 1
+      currentDivision: 1,
+      scrollPos: 0
     };
 
     this.sort = this.sort.bind(this);
     this.updateWidth = this.updateWidth.bind(this);
+    this.updateScroll = this.updateScroll.bind(this);
   }
 
   componentDidMount() {
@@ -35,10 +37,12 @@ class App extends Component {
     this.getAllTeams();
     this.updateWidth();
     window.addEventListener('resize', this.updateWidth);
+    window.addEventListener('scroll', this.updateScroll);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWidth);
+    window.removeEventListener('scroll', this.updateScroll);
   }
 
   districtNumbers() {
@@ -48,7 +52,7 @@ class App extends Component {
   }
 
   getAllTeams() {
-    axios.get('/api').then(res =>
+    axios.get('/local').then(res =>
       this.setState({ allTeamsClasses: res.data }, () => {
         this.handleCurrentClassTeams();
         this.handleCurrentDivisionTeams();
@@ -144,7 +148,7 @@ class App extends Component {
   }
 
   handleHamburger() {
-    let hamburgerClicked = !this.state.hamburgerClicked;
+    const hamburgerClicked = !this.state.hamburgerClicked;
     this.setState({ hamburgerClicked });
   }
 
@@ -157,8 +161,18 @@ class App extends Component {
   }
 
   updateWidth() {
-    let isDesktop = window.innerWidth > 740;
+    const isDesktop = window.innerWidth > 740;
     this.setState({ isDesktop });
+  }
+
+  updateScroll() {
+    const scrollPos = document.documentElement.scrollTop;
+    this.setState({ scrollPos });
+  }
+
+  backToTop(evt) {
+    evt.target.style.transform = 'translateX(200px)';
+    window.scrollTo(0, 0);
   }
 
   sort(a, b) {
@@ -295,6 +309,13 @@ class App extends Component {
 
         {this.renderView()}
         <Footer />
+        <div
+          className="back-to-top"
+          style={{ transform: this.state.scrollPos < 300 ? 'translateX(200px)' : 'translateX(0)' }}
+          onClick={evt => this.backToTop(evt)}
+        >
+          {this.state.isDesktop ? 'Back to top ▲' : '▲'}
+        </div>
       </>
     );
   }
