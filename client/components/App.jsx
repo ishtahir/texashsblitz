@@ -19,7 +19,6 @@ class App extends Component {
       currentlyDisplayingTeams: [],
       districts: [],
       searchInput: '',
-      route: '',
       view: '',
       hamburgerClicked: false,
       isDesktop: false,
@@ -32,8 +31,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('/start').then(res => this.setState({ route: res.data, view: 'classes' }, this.getAllTeams));
     this.districtNumbers();
+    this.getAllTeams();
     this.updateWidth();
     window.addEventListener('resize', this.updateWidth);
   }
@@ -45,11 +44,11 @@ class App extends Component {
   districtNumbers() {
     const districts = [];
     for (let i = 1; i < 33; i++) districts.push(i);
-    this.setState({ districts });
+    this.setState({ districts, view: 'classes' });
   }
 
   getAllTeams() {
-    axios.get(`/${this.state.route}`).then(res =>
+    axios.get('/api').then(res =>
       this.setState({ allTeamsClasses: res.data }, () => {
         this.handleCurrentClassTeams();
         this.handleCurrentDivisionTeams();
