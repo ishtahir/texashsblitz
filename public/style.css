@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: sans-serif;
   background: #fefefe;
@@ -247,6 +251,19 @@ tr:nth-child(2n + 1) {
 .footer p {
   color: #eee;
   font-size: 14px;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  background: #efefef;
+  color: #333;
+  padding: 5px 15px;
+  border: 2px solid #333;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 @media only screen and (min-width: 740px) {
