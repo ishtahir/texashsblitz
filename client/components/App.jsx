@@ -22,8 +22,8 @@ class App extends Component {
       view: '',
       hamburgerClicked: false,
       isDesktop: false,
-      currentClass: 6,
-      currentDivision: 1,
+      currentClass: 0,
+      currentDivision: 0,
       scrollPos: 0
     };
 
@@ -33,7 +33,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.districtNumbers();
+    this.initialValues();
     this.getAllTeams();
     this.updateWidth();
     window.addEventListener('resize', this.updateWidth);
@@ -45,10 +45,10 @@ class App extends Component {
     window.removeEventListener('scroll', this.updateScroll);
   }
 
-  districtNumbers() {
+  initialValues() {
     const districts = [];
     for (let i = 1; i < 33; i++) districts.push(i);
-    this.setState({ districts, view: 'classes' });
+    this.setState({ districts, view: 'classes', currentClass: 6, currentDivision: 1 });
   }
 
   getAllTeams() {
