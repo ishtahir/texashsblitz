@@ -52,7 +52,7 @@ class App extends Component {
   }
 
   getAllTeams() {
-    axios.get('/api').then(res =>
+    axios.get('/local').then(res =>
       this.setState({ allTeamsClasses: res.data }, () => {
         this.handleCurrentClassTeams();
         this.handleCurrentDivisionTeams();
@@ -74,35 +74,37 @@ class App extends Component {
   }
 
   handleCurrentClassTeams() {
-    const currentClassTeams = this.state.allTeamsClasses
-      .filter(team => team.class === this.state.currentClass)
+    const { allTeamsClasses, currentClass } = this.state;
+    const currentClassTeams = allTeamsClasses
+      .filter(team => team.class === currentClass)
       .sort((a, b) => (a.city ? a.city : a.school) - (b.city ? b.city : b.school));
     this.setState({ currentClassTeams });
   }
 
   handleCurrentlyDisplayingTeams() {
+    const { searchInput, currentClass, view, currentClassTeams, filteredTeams, allTeamsClasses, currentDivisionTeams } = this.state;
     let currentlyDisplayingTeams;
-    if (this.state.searchInput === '') {
-      if (this.state.currentClass > 6) {
-        if (this.state.view === 'districts') {
-          currentlyDisplayingTeams = this.state.currentClassTeams;
-        } else if (this.state.view === 'appearances') {
-          currentlyDisplayingTeams = this.state.filteredTeams;
+    if (searchInput === '') {
+      if (currentClass > 6) {
+        if (view === 'districts') {
+          currentlyDisplayingTeams = currentClassTeams;
+        } else if (view === 'appearances') {
+          currentlyDisplayingTeams = filteredTeams;
         } else {
-          currentlyDisplayingTeams = this.state.allTeamsClasses;
+          currentlyDisplayingTeams = allTeamsClasses;
         }
       } else {
-        if (this.state.view === 'appearances') {
-          currentlyDisplayingTeams = this.state.filteredTeams;
+        if (view === 'appearances') {
+          currentlyDisplayingTeams = filteredTeams;
         } else {
-          currentlyDisplayingTeams = this.state.currentDivisionTeams;
+          currentlyDisplayingTeams = currentDivisionTeams;
         }
       }
     } else {
-      if (this.state.currentClass > 6 && this.state.view === 'districts') {
-        currentlyDisplayingTeams = this.state.currentClassTeams;
+      if (currentClass > 6 && view === 'districts') {
+        currentlyDisplayingTeams = currentClassTeams;
       } else {
-        currentlyDisplayingTeams = this.state.filteredTeams;
+        currentlyDisplayingTeams = filteredTeams;
       }
     }
     this.setState({ currentlyDisplayingTeams });
@@ -113,35 +115,37 @@ class App extends Component {
   }
 
   handleCurrentDivisionTeams() {
-    let currentDivisionTeams = this.state.allTeamsClasses
-      .filter(team => team.division === this.state.currentDivision && team.class === this.state.currentClass)
+    const { allTeamsClasses, currentDivision, currentClass } = this.state;
+    let currentDivisionTeams = allTeamsClasses
+      .filter(team => team.division === currentDivision && team.class === currentClass)
       .sort((a, b) => (a.city ? a.city : a.school - b.city ? b.city : b.school));
     this.setState({ currentDivisionTeams }, this.handleFilteredTeams);
   }
 
   handleFilteredTeams() {
+    const { currentClass, view, currentClassTeams, allTeamsClasses, currentDivisionTeams, searchInput } = this.state;
     let currentTeams;
-    if (this.state.currentClass > 6) {
-      if (this.state.view === 'districts') {
-        currentTeams = this.state.currentClassTeams;
-      } else if (this.state.view === 'appearances') {
-        currentTeams = this.state.allTeamsClasses.filter(team => team.stateAppearances.length > 0);
+    if (currentClass > 6) {
+      if (view === 'districts') {
+        currentTeams = currentClassTeams;
+      } else if (view === 'appearances') {
+        currentTeams = allTeamsClasses.filter(team => team.stateAppearances.length > 0);
       } else {
-        currentTeams = this.state.allTeamsClasses;
+        currentTeams = allTeamsClasses;
       }
     } else {
-      if (this.state.view === 'appearances') {
-        currentTeams = this.state.currentClassTeams.filter(team => team.stateAppearances.length > 0);
+      if (view === 'appearances') {
+        currentTeams = currentClassTeams.filter(team => team.stateAppearances.length > 0);
       } else {
-        currentTeams = this.state.currentDivisionTeams;
+        currentTeams = currentDivisionTeams;
       }
     }
     const filteredTeams = currentTeams.filter(
       team =>
-        `${team.city.toLowerCase()} ${team.school.toLowerCase()} ${team.mascot.toLowerCase()}`.includes(this.state.searchInput.toLowerCase()) ||
-        team.city.toLowerCase().includes(this.state.searchInput.toLowerCase()) ||
-        team.school.toLowerCase().includes(this.state.searchInput.toLowerCase()) ||
-        team.mascot.toLowerCase().includes(this.state.searchInput.toLowerCase())
+        `${team.city.toLowerCase()} ${team.school.toLowerCase()} ${team.mascot.toLowerCase()}`.includes(searchInput.toLowerCase()) ||
+        team.city.toLowerCase().includes(searchInput.toLowerCase()) ||
+        team.school.toLowerCase().includes(searchInput.toLowerCase()) ||
+        team.mascot.toLowerCase().includes(searchInput.toLowerCase())
     );
 
     this.setState({ filteredTeams }, this.handleCurrentlyDisplayingTeams);
@@ -171,7 +175,7 @@ class App extends Component {
   }
 
   backToTop(evt) {
-    evt.target.style.transform = 'translateX(200px)';
+    evt.target.style.transform = 'translateX(250px)';
     window.scrollTo(0, 0);
   }
 
@@ -202,40 +206,25 @@ class App extends Component {
   }
 
   renderView() {
-    let currentTeams = this.state.currentlyDisplayingTeams;
-    if (this.state.view === 'classes') {
-      return (
-        <ClassesView
-          teams={currentTeams.sort(this.sort)}
-          isDesktop={this.state.isDesktop}
-          currentClass={this.state.currentClass}
-          currentDivision={this.state.currentDivision}
-        />
-      );
-    } else if (this.state.view === 'districts') {
+    const { currentlyDisplayingTeams, view, isDesktop, currentClass, currentDivision, districts } = this.state;
+    let currentTeams = currentlyDisplayingTeams;
+    if (view === 'classes') {
+      return <ClassesView teams={currentTeams.sort(this.sort)} isDesktop={isDesktop} currentClass={currentClass} currentDivision={currentDivision} />;
+    } else if (view === 'districts') {
       return (
         <DistrictView
-          districts={this.state.districts}
+          districts={districts}
           teams={currentTeams}
-          isDesktop={this.state.isDesktop}
-          currentClass={this.state.currentClass}
-          currentDivision={this.state.currentDivision}
+          isDesktop={isDesktop}
+          currentClass={currentClass}
+          currentDivision={currentDivision}
         />
       );
-    } else if (this.state.view === 'enroll') {
+    } else if (view === 'enroll') {
+      return <EnrollView teams={currentTeams.sort((a, b) => b.enrollment - a.enrollment)} isDesktop={isDesktop} currentClass={currentClass} />;
+    } else if (view === 'appearances') {
       return (
-        <EnrollView
-          teams={currentTeams.sort((a, b) => b.enrollment - a.enrollment)}
-          isDesktop={this.state.isDesktop}
-          currentClass={this.state.currentClass}
-        />
-      );
-    } else if (this.state.view === 'appearances') {
-      return (
-        <StateAppearanceView
-          teams={currentTeams.sort((a, b) => b.stateAppearances.length - a.stateAppearances.length)}
-          currentClass={this.state.currentClass}
-        />
+        <StateAppearanceView teams={currentTeams.sort((a, b) => b.stateAppearances.length - a.stateAppearances.length)} currentClass={currentClass} />
       );
     }
   }
@@ -274,25 +263,26 @@ class App extends Component {
   }
 
   render() {
+    const { hamburgerClicked, searchInput, view, currentClass, currentlyDisplayingTeams, scrollPos, isDesktop } = this.state;
     return (
       <>
         <Navbar
           handleChangeView={this.handleChangeView.bind(this)}
           handleSearchInput={this.handleSearchInput.bind(this)}
           handleHamburger={this.handleHamburger.bind(this)}
-          hamburgerClicked={this.state.hamburgerClicked}
-          searchInput={this.state.searchInput}
-          view={this.state.view}
+          hamburgerClicked={hamburgerClicked}
+          searchInput={searchInput}
+          view={view}
         />
         <div className="search-container">
           <input
             type="text"
             className="search"
             placeholder="&#x1F50D; Filter by city, school, mascot"
-            value={this.state.searchInput}
+            value={searchInput}
             onChange={evt => this.handleSearchInput(evt.target.value)}
           />
-          <span style={{ display: this.state.searchInput ? 'inline' : 'none' }} className="clear-search" onClick={this.resetSearchInput.bind(this)}>
+          <span style={{ display: searchInput ? 'inline' : 'none' }} className="clear-search" onClick={this.resetSearchInput.bind(this)}>
             &#x2715;
           </span>
         </div>
@@ -303,18 +293,18 @@ class App extends Component {
           </select>
         </div>
 
-        {this.state.currentClass > 6 && this.state.view === 'district' ? null : (
-          <p className="text-desc">Total Teams: {<span className="total-number">{this.state.currentlyDisplayingTeams.length}</span>}</p>
+        {currentClass > 6 && view === 'district' ? null : (
+          <p className="text-desc">Total Teams: {<span className="total-number">{currentlyDisplayingTeams.length}</span>}</p>
         )}
 
         {this.renderView()}
         <Footer />
         <div
           className="back-to-top"
-          style={{ transform: this.state.scrollPos < 300 ? 'translateX(200px)' : 'translateX(0)' }}
+          style={{ transform: scrollPos < 300 ? 'translateX(250px)' : 'translateX(0)' }}
           onClick={evt => this.backToTop(evt)}
         >
-          {this.state.isDesktop ? 'Back to top ▲' : '▲'}
+          {isDesktop ? 'Back to top ▲' : '▲'}
         </div>
       </>
     );
