@@ -142,10 +142,10 @@ class App extends Component {
     }
     const filteredTeams = currentTeams.filter(
       team =>
-        `${team.city.toLowerCase()} ${team.school.toLowerCase()} ${team.mascot.toLowerCase()}`.includes(searchInput.toLowerCase()) ||
-        team.city.toLowerCase().includes(searchInput.toLowerCase()) ||
-        team.school.toLowerCase().includes(searchInput.toLowerCase()) ||
-        team.mascot.toLowerCase().includes(searchInput.toLowerCase())
+        `${team.city} ${team.school} ${team.mascot}`.toLowerCase().includes(searchInput) ||
+        team.city.toLowerCase().includes(searchInput) ||
+        team.school.toLowerCase().includes(searchInput) ||
+        team.mascot.toLowerCase().includes(searchInput)
     );
 
     this.setState({ filteredTeams }, this.handleCurrentlyDisplayingTeams);
@@ -157,7 +157,7 @@ class App extends Component {
   };
 
   handleSearchInput = searchInput => {
-    this.setState({ searchInput }, this.handleFilteredTeams);
+    this.setState({ searchInput: searchInput.toLowerCase() }, this.handleFilteredTeams);
   };
 
   resetSearchInput = () => {
