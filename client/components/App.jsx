@@ -27,61 +27,61 @@ class App extends Component {
       scrollPos: 0
     };
 
-    this.sort = this.sort.bind(this);
-    this.updateWidth = this.updateWidth.bind(this);
-    this.updateScroll = this.updateScroll.bind(this);
+    // this.sort = this.sort.bind(this);
+    // this.updateWidth = this.updateWidth.bind(this);
+    // this.updateScroll = this.updateScroll.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.initialValues();
     this.getAllTeams();
     this.updateWidth();
     window.addEventListener('resize', this.updateWidth);
     window.addEventListener('scroll', this.updateScroll);
-  }
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     window.removeEventListener('resize', this.updateWidth);
     window.removeEventListener('scroll', this.updateScroll);
-  }
+  };
 
-  initialValues() {
+  initialValues = () => {
     const districts = [];
     for (let i = 1; i < 33; i++) districts.push(i);
     this.setState({ districts, view: 'classes', currentClass: 6, currentDivision: 1 });
-  }
+  };
 
-  getAllTeams() {
+  getAllTeams = () => {
     axios.get('/local').then(res =>
       this.setState({ allTeamsClasses: res.data }, () => {
         this.handleCurrentClassTeams();
         this.handleCurrentDivisionTeams();
       })
     );
-  }
+  };
 
-  handleChangeView(view) {
+  handleChangeView = view => {
     this.setState({ view }, this.handleFilteredTeams);
-  }
+  };
 
-  handleCurrentClass(classDivision) {
+  handleCurrentClass = classDivision => {
     const currentClass = Number(classDivision.slice(0, 1));
     const currentDivision = currentClass === 6 ? 1 : Number(classDivision.slice(1, 2));
     this.setState({ currentClass }, () => {
       this.handleCurrentClassTeams();
       this.setState({ currentDivision }, this.handleCurrentDivisionTeams);
     });
-  }
+  };
 
-  handleCurrentClassTeams() {
+  handleCurrentClassTeams = () => {
     const { allTeamsClasses, currentClass } = this.state;
     const currentClassTeams = allTeamsClasses
       .filter(team => team.class === currentClass)
       .sort((a, b) => (a.city ? a.city : a.school) - (b.city ? b.city : b.school));
     this.setState({ currentClassTeams });
-  }
+  };
 
-  handleCurrentlyDisplayingTeams() {
+  handleCurrentlyDisplayingTeams = () => {
     const { searchInput, currentClass, view, currentClassTeams, filteredTeams, allTeamsClasses, currentDivisionTeams } = this.state;
     let currentlyDisplayingTeams;
     if (searchInput === '') {
@@ -108,21 +108,21 @@ class App extends Component {
       }
     }
     this.setState({ currentlyDisplayingTeams });
-  }
+  };
 
-  handleCurrentDivision(currentDivision) {
+  handleCurrentDivision = currentDivision => {
     this.setState({ currentDivision }, this.handleCurrentDivisionTeams);
-  }
+  };
 
-  handleCurrentDivisionTeams() {
+  handleCurrentDivisionTeams = () => {
     const { allTeamsClasses, currentDivision, currentClass } = this.state;
     let currentDivisionTeams = allTeamsClasses
       .filter(team => team.division === currentDivision && team.class === currentClass)
       .sort((a, b) => (a.city ? a.city : a.school - b.city ? b.city : b.school));
     this.setState({ currentDivisionTeams }, this.handleFilteredTeams);
-  }
+  };
 
-  handleFilteredTeams() {
+  handleFilteredTeams = () => {
     const { currentClass, view, currentClassTeams, allTeamsClasses, currentDivisionTeams, searchInput } = this.state;
     let currentTeams;
     if (currentClass > 6) {
@@ -149,37 +149,37 @@ class App extends Component {
     );
 
     this.setState({ filteredTeams }, this.handleCurrentlyDisplayingTeams);
-  }
+  };
 
-  handleHamburger() {
+  handleHamburger = () => {
     const hamburgerClicked = !this.state.hamburgerClicked;
     this.setState({ hamburgerClicked });
-  }
+  };
 
-  handleSearchInput(searchInput) {
+  handleSearchInput = searchInput => {
     this.setState({ searchInput }, this.handleFilteredTeams);
-  }
+  };
 
-  resetSearchInput() {
+  resetSearchInput = () => {
     this.setState({ searchInput: '' }, this.handleFilteredTeams);
-  }
+  };
 
-  updateWidth() {
+  updateWidth = () => {
     const isDesktop = window.innerWidth > 740;
     this.setState({ isDesktop });
-  }
+  };
 
-  updateScroll() {
+  updateScroll = () => {
     const scrollPos = document.documentElement.scrollTop;
     this.setState({ scrollPos });
-  }
+  };
 
-  backToTop(evt) {
+  backToTop = evt => {
     evt.target.style.transform = 'translateX(250px)';
     window.scrollTo(0, 0);
-  }
+  };
 
-  sort(a, b) {
+  sort = (a, b) => {
     if (this.state.currentClass > 6) {
       if ((a.city ? a.city : a.school) < (b.city ? b.city : b.school)) {
         return -1;
@@ -203,9 +203,9 @@ class App extends Component {
         }
       }
     }
-  }
+  };
 
-  renderView() {
+  renderView = () => {
     const { currentlyDisplayingTeams, view, isDesktop, currentClass, currentDivision, districts } = this.state;
     let currentTeams = currentlyDisplayingTeams;
     if (view === 'classes') {
@@ -227,9 +227,9 @@ class App extends Component {
         <StateAppearanceView teams={currentTeams.sort((a, b) => b.stateAppearances.length - a.stateAppearances.length)} currentClass={currentClass} />
       );
     }
-  }
+  };
 
-  renderOptions() {
+  renderOptions = () => {
     if (this.state.view === 'appearances') {
       return (
         <>
@@ -260,16 +260,16 @@ class App extends Component {
         </>
       );
     }
-  }
+  };
 
-  render() {
+  render = () => {
     const { hamburgerClicked, searchInput, view, currentClass, currentlyDisplayingTeams, scrollPos, isDesktop } = this.state;
     return (
       <>
         <Navbar
-          handleChangeView={this.handleChangeView.bind(this)}
-          handleSearchInput={this.handleSearchInput.bind(this)}
-          handleHamburger={this.handleHamburger.bind(this)}
+          handleChangeView={this.handleChangeView}
+          handleSearchInput={this.handleSearchInput}
+          handleHamburger={this.handleHamburger}
           hamburgerClicked={hamburgerClicked}
           searchInput={searchInput}
           view={view}
@@ -282,7 +282,7 @@ class App extends Component {
             value={searchInput}
             onChange={evt => this.handleSearchInput(evt.target.value)}
           />
-          <span style={{ display: searchInput ? 'inline' : 'none' }} className="clear-search" onClick={this.resetSearchInput.bind(this)}>
+          <span style={{ display: searchInput ? 'inline' : 'none' }} className="clear-search" onClick={this.resetSearchInput}>
             &#x2715;
           </span>
         </div>
@@ -308,7 +308,7 @@ class App extends Component {
         </div>
       </>
     );
-  }
+  };
 }
 
 export default App;
