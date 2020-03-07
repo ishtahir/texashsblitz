@@ -1,11 +1,8 @@
 import React from 'react';
 
-const District = props => {
-  let header =
-    props.currentClass < 6
-      ? `Class ${props.currentClass}A D${props.currentDivision} District ${props.district}`
-      : `Class ${props.currentClass}A District ${props.district}`;
-  return props.teams.length > 0 ? (
+const District = ({ currentClass, currentDivision, district, teams, isDesktop }) => {
+  let header = currentClass < 6 ? `Class ${currentClass}A D${currentDivision} District ${district}` : `Class ${currentClass}A District ${district}`;
+  return teams.length > 0 ? (
     <table>
       <thead>
         <tr>
@@ -16,16 +13,16 @@ const District = props => {
         <tr>
           <th>School</th>
           <th>Mascot</th>
-          <th style={{ display: `${props.isDesktop ? 'table-cell' : 'none'}` }}>Enrollment</th>
+          <th style={{ display: `${isDesktop ? 'table-cell' : 'none'}` }}>Enrollment</th>
         </tr>
       </thead>
       <tbody>
-        {props.teams.map((team, i) => {
+        {teams.map((team, i) => {
           return (
             <tr key={`${team}${i}`} style={{ background: team.colors[0], color: team.colors[1] }}>
               <td className="school">{team.city ? `${team.city} ${team.school}` : `${team.school}`}</td>
               <td className="mascot">{team.mascot}</td>
-              <td className="enroll" style={{ display: `${props.isDesktop ? 'table-cell' : 'none'}` }}>
+              <td className="enroll" style={{ display: `${isDesktop ? 'table-cell' : 'none'}` }}>
                 {team.enrollment}
               </td>
             </tr>
