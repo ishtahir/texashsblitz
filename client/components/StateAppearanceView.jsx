@@ -1,14 +1,14 @@
 import React from 'react';
 
-const StateAppearanceView = props => {
-  let header = `${props.currentClass}A State Championship Appearances`;
+const StateAppearanceView = ({ currentClass, teams }) => {
+  let header = `${currentClass}A State Championship Appearances`;
   let headerAll = 'All Teams State Championship Appearances';
   return (
     <table>
       <thead>
         <tr>
           <th colSpan="4" className="table-header">
-            {props.currentClass > 6 ? headerAll : header}
+            {currentClass > 6 ? headerAll : header}
           </th>
         </tr>
         <tr>
@@ -18,7 +18,7 @@ const StateAppearanceView = props => {
         </tr>
       </thead>
       <tbody>
-        {props.teams.map((team, i) => {
+        {teams.map((team, i) => {
           return (
             <tr key={`${team}${i}`} style={{ background: team.colors[0], color: team.colors[1] }}>
               <td className="school-mascot">{team.city ? `${team.city} ${team.school} ${team.mascot}` : `${team.school} ${team.mascot}`}</td>
