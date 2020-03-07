@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Navbar = props => {
+const Navbar = ({ handleHamburger, hamburgerClicked, view, handleChangeView }) => {
   return (
     <nav className="navbar">
-      <div className="hamburger-container" onClick={props.handleHamburger} style={{ top: `${props.hamburgerClicked ? '5%' : '15%'}` }}>
-        <div className={props.hamburgerClicked ? 'line line1' : 'line'}></div>
-        <div className={props.hamburgerClicked ? 'line line2' : 'line'}></div>
-        <div className={props.hamburgerClicked ? 'line line3' : 'line'}></div>
+      <div className="hamburger-container" onClick={handleHamburger} style={{ top: `${hamburgerClicked ? '5%' : '15%'}` }}>
+        <div className={hamburgerClicked ? 'line line1' : 'line'}></div>
+        <div className={hamburgerClicked ? 'line line2' : 'line'}></div>
+        <div className={hamburgerClicked ? 'line line3' : 'line'}></div>
       </div>
       <ul className="nav-items">
         <div className="logo-container">
@@ -15,26 +15,26 @@ const Navbar = props => {
           </h1>
         </div>
         <li
-          className={`${props.view === 'classes' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
-          onClick={() => props.handleChangeView('classes')}
+          className={`${view === 'classes' ? 'current' : ''} nav-item ${hamburgerClicked ? 'block' : 'none'}`}
+          onClick={() => handleChangeView('classes')}
         >
           Classes
         </li>
         <li
-          className={`${props.view === 'districts' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
-          onClick={() => props.handleChangeView('districts')}
+          className={`${view === 'districts' ? 'current' : ''} nav-item ${hamburgerClicked ? 'block' : 'none'}`}
+          onClick={() => handleChangeView('districts')}
         >
           Districts
         </li>
         <li
-          className={`${props.view === 'enroll' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
-          onClick={() => props.handleChangeView('enroll')}
+          className={`${view === 'enroll' ? 'current' : ''} nav-item ${hamburgerClicked ? 'block' : 'none'}`}
+          onClick={() => handleChangeView('enroll')}
         >
           Enrollment
         </li>
         <li
-          className={`${props.view === 'appearances' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
-          onClick={() => props.handleChangeView('appearances')}
+          className={`${view === 'appearances' ? 'current' : ''} nav-item ${hamburgerClicked ? 'block' : 'none'}`}
+          onClick={() => handleChangeView('appearances')}
         >
           State Appearances
         </li>
