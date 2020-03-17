@@ -170,7 +170,7 @@ class App extends Component {
   }
 
   backToTop(evt) {
-    evt.target.style.transform = 'translateX(200px)';
+    evt.target.style.transform = 'translateX(220px)';
     window.scrollTo(0, 0);
   }
 
@@ -310,7 +310,7 @@ class App extends Component {
         <Footer />
         <div
           className="back-to-top"
-          style={{ transform: this.state.scrollPos < 300 ? 'translateX(200px)' : 'translateX(0)' }}
+          style={{ transform: this.state.scrollPos < 300 ? 'translateX(220px)' : 'translateX(0)' }}
           onClick={evt => this.backToTop(evt)}
         >
           {this.state.isDesktop ? 'Back to top ▲' : '▲'}
