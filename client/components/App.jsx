@@ -46,13 +46,12 @@ class App extends Component {
   }
 
   initialValues() {
-    const districts = [];
-    for (let i = 1; i < 33; i++) districts.push(i);
+    const districts = [...new Array(32).keys()].map(i => ++i);
     this.setState({ districts, view: 'classes', currentClass: 6, currentDivision: 1 });
   }
 
   getAllTeams() {
-    axios.get('/api').then(res =>
+    axios.get('/local').then(res =>
       this.setState({ allTeamsClasses: res.data }, () => {
         this.handleCurrentClassTeams();
         this.handleCurrentDivisionTeams();
