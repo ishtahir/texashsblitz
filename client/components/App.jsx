@@ -51,7 +51,7 @@ class App extends Component {
   }
 
   getAllTeams() {
-    axios.get('/local').then(res =>
+    axios.get('/api').then(res =>
       this.setState({ allTeamsClasses: res.data }, () => {
         this.handleCurrentClassTeams();
         this.handleCurrentDivisionTeams();
