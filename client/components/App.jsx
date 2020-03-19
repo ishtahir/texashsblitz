@@ -174,8 +174,6 @@ class App extends Component {
     } else {
       defaultVal = `${currentClass}${currentDivision}`;
     }
-    console.log(`view: ${view}`);
-    console.log(`defaultVal: ${defaultVal}`);
     this.setState({ selectClass: defaultVal });
   }
 
