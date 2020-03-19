@@ -15,25 +15,25 @@ const Navbar = props => {
           </h1>
         </div>
         <li
-          className={`${props.view === 'classes' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
+          className={`${props.view === 'classes' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : ''}`}
           onClick={() => props.handleChangeView('classes')}
         >
           Classes
         </li>
         <li
-          className={`${props.view === 'districts' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
+          className={`${props.view === 'districts' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : ''}`}
           onClick={() => props.handleChangeView('districts')}
         >
           Districts
         </li>
         <li
-          className={`${props.view === 'enroll' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
+          className={`${props.view === 'enroll' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : ''}`}
           onClick={() => props.handleChangeView('enroll')}
         >
           Enrollment
         </li>
         <li
-          className={`${props.view === 'appearances' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
+          className={`${props.view === 'appearances' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : ''}`}
           onClick={() => props.handleChangeView('appearances')}
         >
           State Appearances
