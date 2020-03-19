@@ -12,6 +12,14 @@ describe('Class 6A Tests', () => {
         .should('have.length', 245);
     });
 
+    it('Should match the number of total teams with the number of schools displaying for class 6A in Classes view', () => {
+      cy.get('tbody')
+        .children()
+        .then(rows => {
+          cy.get('.total-number').contains(`${rows.length}`);
+        });
+    });
+
     it('Should find 20 Eagles in class 6A', () => {
       cy.get('.search').type('eagles');
       cy.get('.total-number').contains('20');
@@ -26,14 +34,22 @@ describe('Class 6A Tests', () => {
   });
 
   describe('Districts View', () => {
-    it('Loads District page for class 6A', () => {
+    it('Loads Districts page for class 6A', () => {
       cy.get('.nav-items')
-        .contains('District')
+        .contains('Districts')
         .click();
     });
 
     it('Loads all 32 districts for class 6A', () => {
       cy.get('table').should('have.length', 32);
+    });
+
+    it('Should match the number of total teams with the number of schools displaying for class 6A in Districts view', () => {
+      cy.get('tbody')
+        .children()
+        .then(rows => {
+          cy.get('.total-number').contains(`${rows.length}`);
+        });
     });
 
     it('Loads all 21 teams with Houston in the city or school for class 6A', () => {
@@ -54,6 +70,14 @@ describe('Class 6A Tests', () => {
       cy.get('.nav-items')
         .contains('Enrollment')
         .click();
+    });
+
+    it('Should match the number of total teams with the number of schools displaying for class 6A in Enrollments view', () => {
+      cy.get('tbody')
+        .children()
+        .then(rows => {
+          cy.get('.total-number').contains(`${rows.length}`);
+        });
     });
 
     it('Shows Allen as the highest enrollment in class 6A', () => {
@@ -82,7 +106,66 @@ describe('Class 6A Tests', () => {
       cy.get('.total-number').contains('82');
     });
 
+    it('Should match the number of total teams with the number of schools displaying for class 6A for State Appearances view', () => {
+      cy.get('tbody')
+        .children()
+        .then(rows => {
+          cy.get('.total-number').contains(`${rows.length}`);
+        });
+    });
+
     it('Loads Classes page after State Appearances page for class 6A', () => {
+      cy.get('.nav-items')
+        .contains('Classes')
+        .click();
+    });
+  });
+
+  describe('One search all the way through', () => {
+    it('Should search for Panthers', () => {
+      cy.get('.search').type('panthers');
+    });
+
+    it('Should show 14 total Panthers in Classes view', () => {
+      cy.get('tbody')
+        .children()
+        .then(rows => {
+          cy.get('.total-number').contains(`${rows.length}`);
+        });
+    });
+
+    it('Should show 12 districts containing Panthers in Districts view', () => {
+      cy.get('.nav-items')
+        .contains('Districts')
+        .click();
+      cy.get('table').should('have.length', 12);
+    });
+
+    it('Should show Plano East Panthers first in Enrollment view', () => {
+      cy.get('.nav-items')
+        .contains('Enrollment')
+        .click();
+      cy.get('tbody')
+        .first()
+        .contains('Plano East Panthers');
+    });
+
+    it('Should show Keller Fossil Ridge Panthers last in Enrollment view', () => {
+      cy.get('tbody')
+        .last()
+        .contains('Keller Fossil Ridge Panthers');
+    });
+
+    it('Should show 4 Panthers in State Appearances view', () => {
+      cy.get('.nav-items')
+        .contains('State Appearances')
+        .click();
+      cy.get('tbody')
+        .children()
+        .then(rows => {
+          cy.get('.total-number').contains(`${rows.length}`);
+        });
+      cy.get('.clear-search').click();
       cy.get('.nav-items')
         .contains('Classes')
         .click();
