@@ -206,7 +206,7 @@ class App extends Component {
   }
 
   renderView() {
-    const { currentlyDisplayingTeams, view, isDesktop, currentClass, currentDivision } = this.state;
+    const { currentlyDisplayingTeams, view, isDesktop, currentClass, currentDivision, districts } = this.state;
     let currentTeams = currentlyDisplayingTeams;
     if (view === 'classes') {
       return <ClassesView teams={currentTeams.sort(this.sort)} isDesktop={isDesktop} currentClass={currentClass} currentDivision={currentDivision} />;
