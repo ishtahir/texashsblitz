@@ -51,7 +51,7 @@ class App extends Component {
   }
 
   getAllTeams() {
-    axios.get('/api').then(res =>
+    axios.get('/local').then(res =>
       this.setState({ allTeamsClasses: res.data }, () => {
         this.handleCurrentClassTeams();
         this.handleCurrentDivisionTeams();
@@ -273,25 +273,26 @@ class App extends Component {
   }
 
   render() {
+    const { hamburgerClicked, searchInput, view, currentClass, currentlyDisplayingTeams, scrollPos, isDesktop } = this.state;
     return (
       <>
         <Navbar
           handleChangeView={this.handleChangeView.bind(this)}
           handleSearchInput={this.handleSearchInput.bind(this)}
           handleHamburger={this.handleHamburger.bind(this)}
-          hamburgerClicked={this.state.hamburgerClicked}
-          searchInput={this.state.searchInput}
-          view={this.state.view}
+          hamburgerClicked={hamburgerClicked}
+          searchInput={searchInput}
+          view={view}
         />
         <div className="search-container">
           <input
             type="text"
             className="search"
             placeholder="&#x1F50D; Filter by city, school, mascot"
-            value={this.state.searchInput}
+            value={searchInput}
             onChange={evt => this.handleSearchInput(evt.target.value)}
           />
-          <span style={{ display: this.state.searchInput ? 'inline' : 'none' }} className="clear-search" onClick={this.resetSearchInput.bind(this)}>
+          <span style={{ display: searchInput ? 'inline' : 'none' }} className="clear-search" onClick={this.resetSearchInput.bind(this)}>
             &#x2715;
           </span>
         </div>
@@ -302,18 +303,18 @@ class App extends Component {
           </select>
         </div>
 
-        {this.state.currentClass > 6 && this.state.view === 'district' ? null : (
-          <p className="text-desc">Total Teams: {<span className="total-number">{this.state.currentlyDisplayingTeams.length}</span>}</p>
+        {currentClass > 6 && view === 'district' ? null : (
+          <p className="text-desc">Total Teams: {<span className="total-number">{currentlyDisplayingTeams.length}</span>}</p>
         )}
 
         {this.renderView()}
         <Footer />
         <div
           className="back-to-top"
-          style={{ transform: this.state.scrollPos < 300 ? 'translateX(220px)' : 'translateX(0)' }}
+          style={{ transform: scrollPos < 300 ? 'translateX(220px)' : 'translateX(0)' }}
           onClick={evt => this.backToTop(evt)}
         >
-          {this.state.isDesktop ? 'Back to top ▲' : '▲'}
+          {isDesktop ? 'Back to top ▲' : '▲'}
         </div>
       </>
     );
