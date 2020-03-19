@@ -20,6 +20,7 @@ class App extends Component {
       filteredTeams: [],
       searchInput: '',
       view: '',
+      selectClass: '',
       hamburgerClicked: false,
       isDesktop: false,
       currentClass: 0,
@@ -47,7 +48,7 @@ class App extends Component {
 
   initialValues() {
     const districts = [...new Array(32).keys()].map(i => ++i);
-    this.setState({ districts, view: 'classes', currentClass: 6, currentDivision: 1 });
+    this.setState({ districts, view: 'classes', currentClass: 6, currentDivision: 1, selectClass: '61' });
   }
 
   getAllTeams() {
@@ -60,7 +61,10 @@ class App extends Component {
   }
 
   handleChangeView(view) {
-    this.setState({ view }, this.handleFilteredTeams);
+    this.setState({ view }, () => {
+      this.handleFilteredTeams();
+      this.handleSelect();
+    });
   }
 
   handleCurrentClass(classDivision) {
@@ -68,7 +72,10 @@ class App extends Component {
     const currentDivision = currentClass === 6 ? 1 : Number(classDivision.slice(1, 2));
     this.setState({ currentClass }, () => {
       this.handleCurrentClassTeams();
-      this.setState({ currentDivision }, this.handleCurrentDivisionTeams);
+      this.setState({ currentDivision }, () => {
+        this.handleCurrentDivisionTeams();
+        this.handleSelect();
+      });
     });
   }
 
@@ -159,6 +166,19 @@ class App extends Component {
     this.setState({ searchInput }, this.handleFilteredTeams);
   }
 
+  handleSelect() {
+    const { view, currentClass, currentDivision } = this.state;
+    let defaultVal;
+    if (view === 'appearances') {
+      defaultVal = `${currentClass}1`;
+    } else {
+      defaultVal = `${currentClass}${currentDivision}`;
+    }
+    console.log(`view: ${view}`);
+    console.log(`defaultVal: ${defaultVal}`);
+    this.setState({ selectClass: defaultVal });
+  }
+
   resetSearchInput() {
     this.setState({ searchInput: '' }, this.handleFilteredTeams);
   }
@@ -234,7 +254,7 @@ class App extends Component {
     if (view === 'appearances') {
       return (
         <>
-          <option value="6">Class 6A</option>
+          <option value="61">Class 6A</option>
           <option value="51">Class 5A</option>
           <option value="41">Class 4A</option>
           <option value="31">Class 3A</option>
@@ -246,7 +266,7 @@ class App extends Component {
     } else {
       return (
         <>
-          <option value="6">Class 6A</option>
+          <option value="61">Class 6A</option>
           <option value="51">Class 5A D1</option>
           <option value="52">Class 5A D2</option>
           <option value="41">Class 4A D1</option>
@@ -264,7 +284,7 @@ class App extends Component {
   }
 
   render() {
-    const { hamburgerClicked, searchInput, view, currentClass, currentlyDisplayingTeams, scrollPos, isDesktop } = this.state;
+    const { hamburgerClicked, searchInput, view, currentClass, currentlyDisplayingTeams, scrollPos, isDesktop, selectClass } = this.state;
     return (
       <>
         <Navbar
@@ -289,7 +309,7 @@ class App extends Component {
         </div>
         <div className="class-div-select">
           <label className="text-desc">Change Classification:</label>
-          <select className="dropdown" onChange={evt => this.handleCurrentClass(evt.target.value)}>
+          <select className="dropdown" value={selectClass} onChange={evt => this.handleCurrentClass(evt.target.value)}>
             {this.renderOptions()}
           </select>
         </div>
