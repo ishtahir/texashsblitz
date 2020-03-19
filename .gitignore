@@ -5,3 +5,6 @@ node_modules
 server/mongo.js
 server/url.js
 public/bundle.js
+cypress/screenshots
+cypress/videos
+cypress.json
