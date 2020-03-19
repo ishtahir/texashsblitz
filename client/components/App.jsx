@@ -52,7 +52,7 @@ class App extends Component {
   }
 
   getAllTeams() {
-    axios.get('/api').then(res =>
+    axios.get('/local').then(res =>
       this.setState({ allTeamsClasses: res.data }, () => {
         this.handleCurrentClassTeams();
         this.handleCurrentDivisionTeams();
@@ -169,10 +169,14 @@ class App extends Component {
   handleSelect() {
     const { view, currentClass, currentDivision } = this.state;
     let defaultVal;
-    if (view === 'appearances') {
-      defaultVal = `${currentClass}1`;
+    if (currentClass < 7) {
+      if (view === 'appearances') {
+        defaultVal = `${currentClass}1`;
+      } else {
+        defaultVal = `${currentClass}${currentDivision}`;
+      }
     } else {
-      defaultVal = `${currentClass}${currentDivision}`;
+      defaultVal = '7';
     }
     this.setState({ selectClass: defaultVal });
   }
