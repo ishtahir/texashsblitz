@@ -151,8 +151,7 @@ class App extends Component {
   }
 
   handleHamburger() {
-    const { hamburgerClicked } = this.state;
-    const hamburgerClicked = !hamburgerClicked;
+    const hamburgerClicked = !this.state.hamburgerClicked;
     this.setState({ hamburgerClicked });
   }
 
