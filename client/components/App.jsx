@@ -25,7 +25,7 @@ class App extends Component {
       isDesktop: false,
       currentClass: 0,
       currentDivision: 0,
-      scrollPos: 0
+      scrollPos: 0,
     };
 
     this.sort = this.sort.bind(this);
@@ -47,12 +47,12 @@ class App extends Component {
   }
 
   initialValues() {
-    const districts = [...new Array(32).keys()].map(i => ++i);
+    const districts = [...new Array(32).keys()].map((i) => ++i);
     this.setState({ districts, view: 'classes', currentClass: 6, currentDivision: 1, selectClass: '61' });
   }
 
   getAllTeams() {
-    axios.get('/local').then(res =>
+    axios.get('/api').then((res) =>
       this.setState({ allTeamsClasses: res.data }, () => {
         this.handleCurrentClassTeams();
         this.handleCurrentDivisionTeams();
@@ -82,7 +82,7 @@ class App extends Component {
   handleCurrentClassTeams() {
     const { allTeamsClasses, currentClass } = this.state;
     const currentClassTeams = allTeamsClasses
-      .filter(team => team.class === currentClass)
+      .filter((team) => team.class === currentClass)
       .sort((a, b) => (a.city ? a.city : a.school) - (b.city ? b.city : b.school));
     this.setState({ currentClassTeams });
   }
@@ -123,7 +123,7 @@ class App extends Component {
   handleCurrentDivisionTeams() {
     const { allTeamsClasses, currentDivision, currentClass } = this.state;
     let currentDivisionTeams = allTeamsClasses
-      .filter(team => team.division === currentDivision && team.class === currentClass)
+      .filter((team) => team.division === currentDivision && team.class === currentClass)
       .sort((a, b) => (a.city ? a.city : a.school - b.city ? b.city : b.school));
     this.setState({ currentDivisionTeams }, this.handleFilteredTeams);
   }
@@ -135,19 +135,19 @@ class App extends Component {
       if (view === 'districts') {
         currentTeams = currentClassTeams;
       } else if (view === 'appearances') {
-        currentTeams = allTeamsClasses.filter(team => team.stateAppearances.length > 0);
+        currentTeams = allTeamsClasses.filter((team) => team.stateAppearances.length > 0);
       } else {
         currentTeams = allTeamsClasses;
       }
     } else {
       if (view === 'appearances') {
-        currentTeams = currentClassTeams.filter(team => team.stateAppearances.length > 0);
+        currentTeams = currentClassTeams.filter((team) => team.stateAppearances.length > 0);
       } else {
         currentTeams = currentDivisionTeams;
       }
     }
     const filteredTeams = currentTeams.filter(
-      team =>
+      (team) =>
         `${team.city.toLowerCase()} ${team.school.toLowerCase()} ${team.mascot.toLowerCase()}`.includes(searchInput.toLowerCase()) ||
         team.city.toLowerCase().includes(searchInput.toLowerCase()) ||
         team.school.toLowerCase().includes(searchInput.toLowerCase()) ||
@@ -303,7 +303,7 @@ class App extends Component {
             className="search"
             placeholder="&#x1F50D; Filter by city, school, mascot"
             value={searchInput}
-            onChange={evt => this.handleSearchInput(evt.target.value)}
+            onChange={(evt) => this.handleSearchInput(evt.target.value)}
           />
           <span style={{ display: searchInput ? 'inline' : 'none' }} className="clear-search" onClick={this.resetSearchInput.bind(this)}>
             &#x2715;
@@ -311,7 +311,7 @@ class App extends Component {
         </div>
         <div className="class-div-select">
           <label className="text-desc">Change Classification:</label>
-          <select className="dropdown" value={selectClass} onChange={evt => this.handleCurrentClass(evt.target.value)}>
+          <select className="dropdown" value={selectClass} onChange={(evt) => this.handleCurrentClass(evt.target.value)}>
             {this.renderOptions()}
           </select>
         </div>
@@ -325,7 +325,7 @@ class App extends Component {
         <div
           className="back-to-top"
           style={{ transform: scrollPos < 300 ? 'translateX(220px)' : 'translateX(0)' }}
-          onClick={evt => this.backToTop(evt)}
+          onClick={(evt) => this.backToTop(evt)}
         >
           {isDesktop ? 'Back to top ▲' : '▲'}
         </div>
