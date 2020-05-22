@@ -25,10 +25,10 @@ app.use(express.static('public'));
 app.get('/api', (req, res) => {
   axios
     .get(url)
-    .then(response => {
+    .then((response) => {
       res.send(response.data);
     })
-    .catch(err => res.send(err));
+    .catch((err) => res.send(err));
 });
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
