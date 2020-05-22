@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Navbar = props => {
+const Navbar = (props) => {
   return (
     <nav className="navbar">
       <div className="hamburger-container" onClick={props.handleHamburger} style={{ top: `${props.hamburgerClicked ? '5%' : '15%'}` }}>
@@ -15,25 +15,25 @@ const Navbar = props => {
           </h1>
         </div>
         <li
-          className={`${props.view === 'classes' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : ''}`}
+          className={`${props.view === 'classes' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
           onClick={() => props.handleChangeView('classes')}
         >
           Classes
         </li>
         <li
-          className={`${props.view === 'districts' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : ''}`}
+          className={`${props.view === 'districts' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
           onClick={() => props.handleChangeView('districts')}
         >
           Districts
         </li>
         <li
-          className={`${props.view === 'enroll' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : ''}`}
+          className={`${props.view === 'enroll' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
           onClick={() => props.handleChangeView('enroll')}
         >
           Enrollment
         </li>
         <li
-          className={`${props.view === 'appearances' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : ''}`}
+          className={`${props.view === 'appearances' ? 'current' : ''} nav-item ${props.hamburgerClicked ? 'block' : 'none'}`}
           onClick={() => props.handleChangeView('appearances')}
         >
           State Appearances
