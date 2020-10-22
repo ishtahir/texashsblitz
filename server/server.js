@@ -1,12 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-// const urlFile = require('./url.js');
+const urlFile = require('./url.js');
 // const mongo = require('./mongo.js');
 
 const app = express();
 const port = process.env.PORT || 4545;
-const url = process.env.API_URL; // || urlFile;
+const url = process.env.API_URL || urlFile;
 
 app.use(cors());
 app.use(express.json());
