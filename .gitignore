@@ -2,8 +2,8 @@
 .vscode
 
 node_modules
+.env
 server/mongo.js
-server/url.js
 public/bundle.js
 cypress/screenshots
 cypress/videos
