@@ -48,7 +48,7 @@ class App extends Component {
 
   initialValues() {
     const districts = [...new Array(32).keys()].map((i) => ++i);
-    this.setState({ districts, view: 'classes', currentClass: 6, currentDivision: 1, selectClass: '61' });
+    this.setState({ districts, view: 'classes', currentClass: 7, currentDivision: 1, selectClass: '7' });
   }
 
   getAllTeams() {
@@ -256,18 +256,19 @@ class App extends Component {
     if (view === 'appearances') {
       return (
         <>
+          <option value="7">ALL TEAMS</option>
           <option value="61">Class 6A</option>
           <option value="51">Class 5A</option>
           <option value="41">Class 4A</option>
           <option value="31">Class 3A</option>
           <option value="21">Class 2A</option>
           <option value="11">Class 1A</option>
-          <option value="7">ALL TEAMS</option>
         </>
       );
     } else {
       return (
         <>
+          <option value="7">ALL TEAMS</option>
           <option value="61">Class 6A</option>
           <option value="51">Class 5A D1</option>
           <option value="52">Class 5A D2</option>
@@ -279,7 +280,6 @@ class App extends Component {
           <option value="22">Class 2A D2</option>
           <option value="11">Class 1A D1</option>
           <option value="12">Class 1A D2</option>
-          <option value="7">ALL TEAMS</option>
         </>
       );
     }
