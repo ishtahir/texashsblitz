@@ -67,30 +67,33 @@ body {
 
 .football-icon {
   width: 30px;
-  filter: invert(99%) sepia(54%) saturate(67%) hue-rotate(239deg) brightness(113%) contrast(87%);
+  filter: invert(99%) sepia(54%) saturate(67%) hue-rotate(239deg)
+    brightness(113%) contrast(87%);
   display: none;
 }
 
 .texashs {
   font-family: 'Saira Stencil One', cursive;
-  font-size: 40px;
-  background-color: #00f7ff;
-  background-image: -webkit-linear-gradient(315deg, #ffffff 0%, #239700fd 64%);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
+  font-size: 45px;
+  color: #58ee6cfd;
   cursor: pointer;
   height: 63px;
 }
 
-.blitz {
-  font-family: 'Ceviche One', cursive;
-  font-size: 45px;
-  background-color: #ff0000;
-  background-image: -webkit-linear-gradient(315deg, #ff0000 0%, #ffed00 74%);
+.state {
+  font-family: 'Andika New Basic', sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  background-color: #0000ff;
+  background-image: -webkit-linear-gradient(
+    0deg,
+    #ff5e5e 33%,
+    #fff 33% 67%,
+    #3a7fff 67%
+  );
+  -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .current {
@@ -294,11 +297,11 @@ tr:nth-child(2n + 1) {
   }
 
   .texashs {
-    font-size: 35px;
+    font-size: 40px;
   }
 
-  .blitz {
-    font-size: 40px;
+  .state {
+    font-size: 35px;
   }
 
   .nav-item {
