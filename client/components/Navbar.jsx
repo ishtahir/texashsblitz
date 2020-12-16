@@ -11,7 +11,7 @@ const Navbar = (props) => {
       <ul className="nav-items">
         <div className="logo-container">
           <h1 className="texashs">
-            <img src="../../american-football.svg" alt="Football" className="football-icon" /> Texas HS <span className="blitz">Blitz</span>
+            <img src="../../american-football.svg" alt="Football" className="football-icon" /> TXHSFB <span className="state">STATE</span>
           </h1>
         </div>
         <li
