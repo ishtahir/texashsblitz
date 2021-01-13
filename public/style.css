@@ -84,16 +84,18 @@ body {
   font-family: 'Andika New Basic', sans-serif;
   font-size: 40px;
   font-weight: bold;
-  background-color: #0000ff;
-  background-image: -webkit-linear-gradient(
-    0deg,
-    #ff5e5e 33%,
-    #fff 33% 67%,
-    #3a7fff 67%
-  );
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
+}
+
+.logo-st {
+  color: #ff5e5e;
+}
+
+.logo-a {
+  color: #fff;
+}
+
+.logo-te {
+  color: #3a7fff;
 }
 
 .current {
