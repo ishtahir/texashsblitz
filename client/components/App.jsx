@@ -135,7 +135,13 @@ class App extends Component {
       if (view === 'districts') {
         currentTeams = currentClassTeams;
       } else if (view === 'appearances') {
-        currentTeams = allTeamsClasses.filter((team) => team.stateAppearances.length > 0);
+        const year = parseInt(searchInput);
+        if (!Number.isNaN(year)) {
+          currentTeams = allTeamsClasses.filter(team => team.stateAppearances.includes(year));
+          console.log({ year, currentTeams})
+        } else {
+          currentTeams = allTeamsClasses.filter((team) => team.stateAppearances.length > 0);
+        }
       } else {
         currentTeams = allTeamsClasses;
       }
@@ -151,7 +157,7 @@ class App extends Component {
         `${team.city.toLowerCase()} ${team.school.toLowerCase()} ${team.mascot.toLowerCase()}`.includes(searchInput.toLowerCase()) ||
         team.city.toLowerCase().includes(searchInput.toLowerCase()) ||
         team.school.toLowerCase().includes(searchInput.toLowerCase()) ||
-        team.mascot.toLowerCase().includes(searchInput.toLowerCase())
+        team.mascot.toLowerCase().includes(searchInput.toLowerCase()) || team.stateAppearances.includes(parseInt(searchInput))
     );
 
     this.setState({ filteredTeams }, this.handleCurrentlyDisplayingTeams);
@@ -301,7 +307,7 @@ class App extends Component {
           <input
             type="text"
             className="search"
-            placeholder="&#x1F50D; Filter by city, school, mascot"
+            placeholder="&#x1F50D; Filter by city, school, mascot, year"
             value={searchInput}
             onChange={(evt) => this.handleSearchInput(evt.target.value)}
           />
